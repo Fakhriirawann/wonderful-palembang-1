@@ -74,7 +74,7 @@ function HeroSection() {
       </p>
       <div className="flex flex-col sm:flex-row gap-6 justify-center">
         <Link
-          href="/attractions"
+          to="/attractions"
           className="btn btn-lg rounded-full bg-gradient-to-r from-accent to-success border-0 text-white shadow-2xl hover:shadow-accent/25 hover:scale-105 transition-all duration-300"
         >
           <Camera className="w-5 h-5 mr-2" />
@@ -100,12 +100,18 @@ function HeroSection() {
 function StatsSection() {
   return (
     <>
-      <div className="py-20 bg-gradient-to-r from-[#fdfcfb] to-[#e2d1c3]">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Population */}
-            <div className="group">
-              <div className="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-8 border border-slate-100 hover:border-[#316D7C]/20 group-hover:scale-105">
+ <div className="py-20 bg-gradient-to-r from-[#fdfcfb] to-[#e2d1c3]">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="group">
+            <div className="relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-8 border border-slate-100 hover:border-[#316D7C]/20 group-hover:scale-105 overflow-hidden">
+              <div
+                className="absolute inset-0 bg-cover bg-center opacity-35 transition-opacity duration-500 group-hover:opacity-15"
+                style={{
+                  backgroundImage: `url('/lrt.jpeg?height=400&width=600')`,
+                }}
+              />
+              <div className="relative z-10">
                 <div className="flex items-center justify-between mb-4">
                   <div className="w-16 h-16 bg-gradient-to-br from-[#316D7C] to-[#8C7A66] rounded-2xl flex items-center justify-center shadow-lg">
                     <Users className="w-8 h-8 text-white" />
@@ -117,14 +123,21 @@ function StatsSection() {
                     <div className="text-slate-600 font-medium">Population</div>
                   </div>
                 </div>
-                <p className="text-slate-500">
-                  Friendly locals ready to welcome you
-                </p>
+                <p className="text-slate-500">Friendly locals ready to welcome you</p>
               </div>
             </div>
+          </div>
+          <div className="group">
+            <div className="relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-8 border border-slate-100 hover:border-[#8C7A66]/20 group-hover:scale-105 overflow-hidden">
+            
+              <div
+                className="absolute inset-0 bg-cover bg-center opacity-35 transition-opacity duration-500 group-hover:opacity-15"
+                style={{
+                  backgroundImage: `url('/ampera-dulu.jpg?height=400&width=600')`,
+                }}
+              />
 
-            <div className="group">
-              <div className="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-8 border border-slate-100 hover:border-[#8C7A66]/20 group-hover:scale-105">
+              <div className="relative z-10">
                 <div className="flex items-center justify-between mb-4">
                   <div className="w-16 h-16 bg-gradient-to-br from-[#8C7A66] to-[#C1A175] rounded-2xl flex items-center justify-center shadow-lg">
                     <Calendar className="w-8 h-8 text-white" />
@@ -136,14 +149,19 @@ function StatsSection() {
                     <div className="text-slate-600 font-medium">Founded</div>
                   </div>
                 </div>
-                <p className="text-slate-500">
-                  Over 1,300 years of rich history
-                </p>
+                <p className="text-slate-500">Over 1,300 years of rich history</p>
               </div>
             </div>
-
-            <div className="group">
-              <div className="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-8 border border-slate-100 hover:border-[#C1A175]/20 group-hover:scale-105">
+          </div>
+          <div className="group">
+            <div className="relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-8 border border-slate-100 hover:border-[#C1A175]/20 group-hover:scale-105 overflow-hidden">
+              <div
+                className="absolute inset-0 bg-cover bg-center opacity-35 transition-opacity duration-500 group-hover:opacity-15"
+                style={{
+                  backgroundImage: `url('/musi.jpeg?height=400&width=600')`,
+                }}
+              />
+              <div className="relative z-10">
                 <div className="flex items-center justify-between mb-4">
                   <div className="w-16 h-16 bg-gradient-to-br from-[#C1A175] to-[#316D7C] rounded-2xl flex items-center justify-center shadow-lg">
                     <MapPin className="w-8 h-8 text-white" />
@@ -155,14 +173,13 @@ function StatsSection() {
                     <div className="text-slate-600 font-medium">Area</div>
                   </div>
                 </div>
-                <p className="text-slate-500">
-                  Urban paradise along the Musi River
-                </p>
+                <p className="text-slate-500">Urban paradise along the Musi River</p>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
     </>
   );
 }
