@@ -57,7 +57,7 @@ function HeroSection() {
                 className="btn btn-lg rounded-full bg-gradient-to-r from-accent to-success border-0 text-white shadow-2xl hover:shadow-accent/25 hover:scale-105 transition-all duration-300"
               >
                 <Camera className="w-5 h-5 mr-2" />
-                Explore Attractions
+                Explore Our Attractions
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
               <Link
@@ -100,7 +100,7 @@ function StatsSection() {
               </div>
             </div>
 
-            {/* Founded */}
+            
             <div className="group">
               <div className="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-8 border border-slate-100 hover:border-[#8C7A66]/20 group-hover:scale-105">
                 <div className="flex items-center justify-between mb-4">
@@ -118,7 +118,7 @@ function StatsSection() {
               </div>
             </div>
 
-            {/* Area */}
+            
             <div className="group">
               <div className="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-8 border border-slate-100 hover:border-[#C1A175]/20 group-hover:scale-105">
                 <div className="flex items-center justify-between mb-4">
