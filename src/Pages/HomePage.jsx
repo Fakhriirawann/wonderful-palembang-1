@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { RiGlobalLine } from "react-icons/ri";
 import { FiCoffee } from "react-icons/fi";
 import { LuLeaf } from "react-icons/lu";
-import MuseumImage from "../assets/museum.jpeg";
 import Footer from "./Footer";
 import {
   Play,
@@ -183,7 +182,7 @@ function Section3() {
               <div className="bg-white rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 border border-primary/10 group-hover:scale-105">
                 <div className="w-full h-48 mb-6 overflow-hidden rounded-2xl shadow-lg">
                   <img
-                    src={MuseumImage}
+                    src="\museum.jpeg"
                     alt="Rich Heritage"
                     className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
                   />
