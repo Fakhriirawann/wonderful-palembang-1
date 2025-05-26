@@ -47,7 +47,7 @@ function NavBar() {
           </div>
           <Link href="/" className="btn btn-ghost">
             <img
-              src="/logo.jpeg"
+              src="\logo.jpeg"
               alt="Wonderful Palembang"
               className="h-18 w-auto"
             />
