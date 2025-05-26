@@ -1,23 +1,32 @@
 import React from "react";
 import NavBar from "./NavBar";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { RiGlobalLine } from "react-icons/ri";
 import { FiCoffee } from "react-icons/fi";
 import { LuLeaf } from "react-icons/lu";
+import MuseumImage from "../assets/museum.jpeg";
 import Footer from "./Footer";
-import { Play, MapPin, Users, Calendar, Camera, Star, ArrowRight, Sparkles } from "lucide-react"
-
+import {
+  Play,
+  MapPin,
+  Users,
+  Calendar,
+  Camera,
+  Star,
+  ArrowRight,
+  Sparkles,
+} from "lucide-react";
 
 function HomePage() {
   return (
     <>
-     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      <NavBar />
-      <HeroSection />
-      <StatsSection/>
-      <Section3 />
-      <Section4 />
-      <Footer/>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+        <NavBar />
+        <HeroSection />
+        <StatsSection />
+        <Section3 />
+        <Section4 />
+        <Footer />
       </div>
     </>
   );
@@ -29,7 +38,12 @@ function HeroSection() {
   return (
     <>
       <div className="hero min-h-screen relative overflow-hidden">
-        <video autoPlay muted loop className="absolute inset-0 w-full h-full object-cover">
+        <video
+          autoPlay
+          muted
+          loop
+          className="absolute inset-0 w-full h-full object-cover"
+        >
           <source src="/placeholder-video.mp4" type="video/mp4" />
         </video>
         <div className="hero-overlay bg-gradient-to-br from-[#316D7C]/60 via-[#8C7A66]/40 to-[#C1A175]/60"></div>
@@ -48,8 +62,9 @@ function HeroSection() {
               </span>
             </h1>
             <p className="mb-10 text-xl md:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed font-light">
-              Discover the Venice of the East, where ancient traditions meet modern innovation. Experience the rich
-              culture, delicious cuisine, and warm hospitality of South Sumatra's capital.
+              Discover the Venice of the East, where ancient traditions meet
+              modern innovation. Experience the rich culture, delicious cuisine,
+              and warm hospitality of South Sumatra's capital.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link
@@ -70,7 +85,7 @@ function HeroSection() {
             </div>
           </div>
         </div>
-        </div>
+      </div>
     </>
   );
 }
@@ -81,7 +96,6 @@ function StatsSection() {
       <div className="py-20 bg-gradient-to-r from-[#fdfcfb] to-[#e2d1c3]">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-
             {/* Population */}
             <div className="group">
               <div className="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-8 border border-slate-100 hover:border-[#316D7C]/20 group-hover:scale-105">
@@ -96,11 +110,12 @@ function StatsSection() {
                     <div className="text-slate-600 font-medium">Population</div>
                   </div>
                 </div>
-                <p className="text-slate-500">Friendly locals ready to welcome you</p>
+                <p className="text-slate-500">
+                  Friendly locals ready to welcome you
+                </p>
               </div>
             </div>
 
-            
             <div className="group">
               <div className="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-8 border border-slate-100 hover:border-[#8C7A66]/20 group-hover:scale-105">
                 <div className="flex items-center justify-between mb-4">
@@ -114,11 +129,12 @@ function StatsSection() {
                     <div className="text-slate-600 font-medium">Founded</div>
                   </div>
                 </div>
-                <p className="text-slate-500">Over 1,300 years of rich history</p>
+                <p className="text-slate-500">
+                  Over 1,300 years of rich history
+                </p>
               </div>
             </div>
 
-            
             <div className="group">
               <div className="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-8 border border-slate-100 hover:border-[#C1A175]/20 group-hover:scale-105">
                 <div className="flex items-center justify-between mb-4">
@@ -132,17 +148,17 @@ function StatsSection() {
                     <div className="text-slate-600 font-medium">Area</div>
                   </div>
                 </div>
-                <p className="text-slate-500">Urban paradise along the Musi River</p>
+                <p className="text-slate-500">
+                  Urban paradise along the Musi River
+                </p>
               </div>
             </div>
-
           </div>
         </div>
       </div>
     </>
   );
 }
-
 
 function Section3() {
   return (
@@ -167,14 +183,17 @@ function Section3() {
               <div className="bg-white rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 border border-primary/10 group-hover:scale-105">
                 <div className="w-full h-48 mb-6 overflow-hidden rounded-2xl shadow-lg">
                   <img
-                    src="src\assets\museum.jpeg"
+                    src={MuseumImage}
                     alt="Rich Heritage"
                     className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-slate-800">Rich Heritage</h3>
+                <h3 className="text-2xl font-bold mb-4 text-slate-800">
+                  Rich Heritage
+                </h3>
                 <p className="text-slate-600 leading-relaxed">
-                  Explore ancient Srivijaya kingdom ruins and traditional architecture that tells stories of centuries past.
+                  Explore ancient Srivijaya kingdom ruins and traditional
+                  architecture that tells stories of centuries past.
                 </p>
               </div>
             </div>
@@ -183,14 +202,17 @@ function Section3() {
               <div className="bg-white rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 border border-secondary/10 group-hover:scale-105">
                 <div className="w-full h-48 mb-6 overflow-hidden rounded-2xl shadow-lg">
                   <img
-                    src="src\assets\pempek.jpeg"
+                    src="/pempek.jpeg"
                     alt="Culinary Paradise"
                     className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-slate-800">Culinary Paradise</h3>
+                <h3 className="text-2xl font-bold mb-4 text-slate-800">
+                  Culinary Paradise
+                </h3>
                 <p className="text-slate-600 leading-relaxed">
-                  Taste authentic Pempek, Tekwan, and other local delicacies that will tantalize your taste buds.
+                  Taste authentic Pempek, Tekwan, and other local delicacies
+                  that will tantalize your taste buds.
                 </p>
               </div>
             </div>
@@ -204,9 +226,12 @@ function Section3() {
                     className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-slate-800">River City</h3>
+                <h3 className="text-2xl font-bold mb-4 text-slate-800">
+                  River City
+                </h3>
                 <p className="text-slate-600 leading-relaxed">
-                  Experience life along the mighty Musi River and its vibrant floating markets.
+                  Experience life along the mighty Musi River and its vibrant
+                  floating markets.
                 </p>
               </div>
             </div>
@@ -217,11 +242,10 @@ function Section3() {
   );
 }
 
-
 function Section4() {
   return (
     <>
-     <div className="py-24 bg-gradient-to-br from-[#316D7C] via-[#8C7A66] to-[#C1A175] relative overflow-hidden">
+      <div className="py-24 bg-gradient-to-br from-[#316D7C] via-[#8C7A66] to-[#C1A175] relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsUnVsZT0iZXZlbm9kZCI+PGcgZmlsbD0iI2ZmZmZmZiIgZmlsbE9wYWNpdHk9IjAuMSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-20"></div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="max-w-4xl mx-auto">
@@ -232,8 +256,8 @@ function Section4() {
               </span>
             </h2>
             <p className="text-xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Join thousands of visitors who have fallen in love with our beautiful city and created unforgettable
-              memories
+              Join thousands of visitors who have fallen in love with our
+              beautiful city and created unforgettable memories
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link
@@ -255,7 +279,6 @@ function Section4() {
           </div>
         </div>
       </div>
-
     </>
   );
 }
