@@ -3,6 +3,7 @@ import React from "react";
 import { FiCoffee } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
+
 function NavBar() {
   return (
     <>
@@ -19,33 +20,33 @@ function NavBar() {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-xl bg-white/90 backdrop-blur-md rounded-2xl w-52 border border-white/20"
             >
               <li>
-                <Link href="/" className="rounded-xl">
+                <Link to="/" className="rounded-xl">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="rounded-xl">
+                <Link to="/about" className="rounded-xl">
                   About
                 </Link>
               </li>
               <li>
-                <Link href="/attractions" className="rounded-xl">
+                <Link to="/attractions" className="rounded-xl">
                   Attractions
                 </Link>
               </li>
               <li>
-                <Link href="/culture" className="rounded-xl">
+                <Link to="/culture" className="rounded-xl">
                   Culture
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="rounded-xl">
+                <Link to="/contact" className="rounded-xl">
                   Contact
                 </Link>
               </li>
             </ul>
           </div>
-          <Link href="/" className="btn btn-ghost">
+          <Link to="/" className="btn btn-ghost">
             <img
               src="\logo.jpeg"
               alt="Wonderful Palembang"
@@ -64,27 +65,27 @@ function NavBar() {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 space-x-2">
             <li>
-              <Link href="/" className="btn btn-ghost rounded-full hover:bg-primary/10">
+              <Link to="/" className="btn btn-ghost rounded-full hover:bg-primary/10">
                 Home
               </Link>
             </li>
             <li>
-              <Link href="/about" className="btn btn-ghost rounded-full hover:bg-primary/10">
+              <Link to="/about" className="btn btn-ghost rounded-full hover:bg-primary/10">
                 About
               </Link>
             </li>
             <li>
-              <Link href="/attractions" className="btn btn-ghost rounded-full hover:bg-primary/10">
+              <Link to="/attractions" className="btn btn-ghost rounded-full hover:bg-primary/10">
                 Attractions
               </Link>
             </li>
             <li>
-              <Link href="/culture" className="btn btn-ghost rounded-full hover:bg-primary/10">
+              <Link to="/culture" className="btn btn-ghost rounded-full hover:bg-primary/10">
                 Culture
               </Link>
             </li>
             <li>
-              <Link href="/contact" className="btn btn-ghost rounded-full hover:bg-primary/10">
+              <Link to="/contact" className="btn btn-ghost rounded-full hover:bg-primary/10">
                 Contact
               </Link>
             </li>

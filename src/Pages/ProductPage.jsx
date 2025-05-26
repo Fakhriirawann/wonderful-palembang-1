@@ -3,6 +3,7 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 import { IoIosArrowRoundForward } from "react-icons/io";
 
+
 function ProductPage() {
   return (
     <div>
