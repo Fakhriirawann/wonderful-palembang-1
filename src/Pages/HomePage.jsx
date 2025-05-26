@@ -38,21 +38,21 @@ function HeroSection() {
   return (
     <>
       <div className="relative w-full h-screen overflow-hidden">
-  {/* Background Video */}
+
   <video
     autoPlay
     muted
     loop
     playsInline
-    className="absolute inset-0 w-full h-full object-cover brightness-50"
+    className="absolute inset-0 lg:w-full  h-full sm:w-[400px] object-cover brightness-50 "
   >
     <source src="/vid-banner.mp4" type="video/mp4" />
   </video>
 
-  {/* Optional Gradient Overlay */}
+ 
   <div className="absolute inset-0 bg-gradient-to-br from-[#316D7C]/60 via-[#8C7A66]/40 to-[#C1A175]/60 z-0" />
 
-  {/* Hero Content */}
+ 
   <div className="hero-content text-center text-white relative z-10">
     <div className="max-w-5xl">
       <div className="mb-6">
