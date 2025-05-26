@@ -221,7 +221,7 @@ function Section3() {
               <div className="bg-white rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 border border-accent/10 group-hover:scale-105">
                 <div className="w-full h-48 mb-6 overflow-hidden rounded-2xl shadow-lg">
                   <img
-                    src="src\assets\ampera.jpeg"
+                    src="/ampera.jpeg"
                     alt="River City"
                     className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
                   />
