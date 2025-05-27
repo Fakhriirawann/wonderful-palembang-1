@@ -6,6 +6,7 @@ import Attractions from "./Pages/Attractions";
 import Culture from "./Pages/Culture";
 import History from "./Pages/History";
 import ContactPage from "./Pages/ContactPage";
+import NotFoundPage from "./Pages/NotFoundPage";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/culture" element={<Culture/>}  />
           <Route path="/history" element={<History/>}  />
           <Route path="/contact" element={<ContactPage/>}  />
+          <Route path="*" element={<NotFoundPage/>}  />
         </Routes>
       </Router>
       

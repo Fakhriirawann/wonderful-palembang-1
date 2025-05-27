@@ -78,7 +78,7 @@ function HeroSection() {
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
               <Link
-                href="/about"
+                to="/history"
                 className="btn btn-lg rounded-full bg-white/20 backdrop-blur-md text-white border-white/30 hover:bg-white/30 hover:scale-105 transition-all duration-300"
               >
                 <Play className="w-5 h-5 mr-2" />

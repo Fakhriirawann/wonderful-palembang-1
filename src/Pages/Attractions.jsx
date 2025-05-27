@@ -292,13 +292,13 @@ function FeaturedSection() {
             </div>
           </div>
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="btn btn-lg rounded-full bg-gradient-to-r from-[#316D7C] to-[#C1A175] border-0 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+            <a 
+            target="blank_"
+            href="https://palembang.go.id/charming/jembatan-ampera" 
+            className="btn btn-lg rounded-full bg-gradient-to-r from-[#316D7C] to-[#C1A175] border-0 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
               Learn More
               <ArrowRight className="w-5 h-5 ml-2" />
-            </button>
-            <button className="btn btn-lg rounded-full bg-white border-2 border-[#4b3832] text-[#4b3832] hover:bg-[#4b3832] hover:text-white hover:scale-105 transition-all duration-300">
-              Get Directions
-            </button>
+            </a>
           </div>
         </div>
       </div>

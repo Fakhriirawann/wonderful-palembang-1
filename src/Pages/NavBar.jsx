@@ -1,18 +1,25 @@
-// rfce
 import React from "react";
 import { Link } from "react-router-dom";
 
 function NavBar() {
   return (
     <>
-    <div className="navbar bg-white/80 backdrop-blur-md shadow-lg border-b border-white/20 fixed top-0 z-50 flex flex-col lg:flex-row items-start lg:items-center px-4 py-2 gap-2 lg:gap-0">
-  {/* Navbar Top Row (Logo + Hamburger) */}
-  <div className="w-full flex justify-between items-center lg:justify-start">
-    {/* Mobile Menu Button */}
+    <div className="navbar bg-white/80 backdrop-blur-md shadow-lg border-b border-white/20 fixed top-0 z-50 px-4">
+  <div className="flex-1 flex items-center">
     <div className="dropdown lg:hidden">
-      <label tabIndex={0} className="btn btn-ghost focus:outline-none">
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+      <label tabIndex={0} className="btn btn-ghost">
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M4 6h16M4 12h8m-8 6h16"
+          />
         </svg>
       </label>
       <ul
@@ -26,8 +33,6 @@ function NavBar() {
         <li><Link to="/contact">Contact</Link></li>
       </ul>
     </div>
-
-    {/* Logo */}
     <Link to="/" className="btn btn-ghost flex items-center gap-2">
       <img
         src="/logo.jpeg"
@@ -43,18 +48,9 @@ function NavBar() {
         </span>
       </div>
     </Link>
-
-    {/* CTA on Mobile */}
-    <Link
-      to="/contact"
-      className="lg:hidden btn btn-sm rounded-full bg-gradient-to-r from-[#D8A47F] to-[#A58CAA] text-white border-0 shadow-md hover:shadow-lg"
-    >
-      Visit
-    </Link>
   </div>
 
-  {/* Center Menu (desktop only) */}
-  <div className="hidden lg:flex navbar-center w-full justify-center">
+  <div className="hidden lg:flex flex-1 justify-center">
     <ul className="menu menu-horizontal px-1 space-x-2">
       <li><Link to="/" className="btn btn-ghost rounded-full hover:bg-primary/10">Home</Link></li>
       <li><Link to="/history" className="btn btn-ghost rounded-full hover:bg-primary/10">History</Link></li>
@@ -64,11 +60,16 @@ function NavBar() {
     </ul>
   </div>
 
-  {/* CTA on Desktop */}
-  <div className="hidden lg:flex navbar-end">
+  <div className="flex-none">
     <Link
       to="/contact"
-      className="btn btn-lg rounded-full bg-gradient-to-r from-[#D8A47F] to-[#A58CAA] text-white border-0 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+      className="lg:hidden btn btn-sm rounded-full bg-gradient-to-r from-[#D8A47F] to-[#A58CAA] text-white border-0 shadow-md hover:shadow-lg"
+    >
+      Visit
+    </Link>
+    <Link
+      to="/contact"
+      className="hidden lg:inline-flex btn btn-lg rounded-full bg-gradient-to-r from-[#D8A47F] to-[#A58CAA] text-white border-0 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
     >
       Visit Now
     </Link>
