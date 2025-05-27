@@ -194,7 +194,7 @@ function Section3() {
               <Star className="w-4 h-4 mr-2" />
               Why Choose Palembang
             </div>
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+            <h2 className="pb-3 text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
               Unforgettable Experiences
             </h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">

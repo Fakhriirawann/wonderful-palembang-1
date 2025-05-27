@@ -1,18 +1,26 @@
 // rfce
 import React from "react";
-import { FiCoffee } from "react-icons/fi";
 import { Link } from "react-router-dom";
-
 
 function NavBar() {
   return (
     <>
-       <div className="navbar bg-white/80 backdrop-blur-md shadow-lg border-b border-white/20 fixed top-0 z-50">
+      <div className="navbar bg-white/80 backdrop-blur-md shadow-lg border-b border-white/20 fixed top-0 z-50">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16"></path>
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                ></path>
               </svg>
             </div>
             <ul
@@ -25,8 +33,8 @@ function NavBar() {
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="rounded-xl">
-                  About
+                <Link to="/history" className="rounded-xl">
+                  History
                 </Link>
               </li>
               <li>
@@ -50,7 +58,7 @@ function NavBar() {
             <img
               src="\logo.jpeg"
               alt="Wonderful Palembang"
-              className="h-18 w-auto"
+              className="h-auto w-auto max-h-12 md:max-h-18"
             />
             <div className="flex flex-col items-start">
               <span className="font-bold text-3xl bg-gradient-to-r from-[#316D7C] via-[#8C7A66] to-[#C1A175] bg-clip-text text-transparent leading-tight">
@@ -65,27 +73,42 @@ function NavBar() {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 space-x-2">
             <li>
-              <Link to="/" className="btn btn-ghost rounded-full hover:bg-primary/10">
+              <Link
+                to="/"
+                className="btn btn-ghost rounded-full hover:bg-primary/10"
+              >
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/about" className="btn btn-ghost rounded-full hover:bg-primary/10">
-                About
+              <Link
+                to="/history"
+                className="btn btn-ghost rounded-full hover:bg-primary/10"
+              >
+                History
               </Link>
             </li>
             <li>
-              <Link to="/attractions" className="btn btn-ghost rounded-full hover:bg-primary/10">
+              <Link
+                to="/attractions"
+                className="btn btn-ghost rounded-full hover:bg-primary/10"
+              >
                 Attractions
               </Link>
             </li>
             <li>
-              <Link to="/culture" className="btn btn-ghost rounded-full hover:bg-primary/10">
+              <Link
+                to="/culture"
+                className="btn btn-ghost rounded-full hover:bg-primary/10"
+              >
                 Culture
               </Link>
             </li>
             <li>
-              <Link to="/contact" className="btn btn-ghost rounded-full hover:bg-primary/10">
+              <Link
+                to="/contact"
+                className="btn btn-ghost rounded-full hover:bg-primary/10"
+              >
                 Contact
               </Link>
             </li>
@@ -93,8 +116,8 @@ function NavBar() {
         </div>
         <div className="navbar-end">
           <Link
-            href="/contact"
-            className="btn btn-primary rounded-full bg-gradient-to-r from-primary to-secondary border-0 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+            to="/contact"
+            className="btn btn-lg rounded-full bg-gradient-to-r from-[#D8A47F] to-[#A58CAA] text-white border-0 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
           >
             Visit Now
           </Link>

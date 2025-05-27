@@ -34,8 +34,8 @@ function Footer() {
         <h3 className="font-bold text-lg mb-4 text-slate-800">Quick Links</h3>
         <ul className="space-y-2">
           <li>
-            <Link to="/about" className="text-slate-600 hover:text-primary transition-colors">
-              About
+            <Link to="/history" className="text-slate-600 hover:text-primary transition-colors">
+              History
             </Link>
           </li>
           <li>
