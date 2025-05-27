@@ -299,7 +299,7 @@ function Section4() {
                 className="btn btn-lg rounded-full bg-white/20 backdrop-blur-md text-white border-white/30 hover:bg-white/30 hover:scale-105 transition-all duration-300"
               >
                 <Camera className="w-5 h-5 mr-2" />
-                View Gallery
+                View Destinations
               </Link>
             </div>
           </div>
