@@ -196,7 +196,7 @@ function InfoContact() {
                 <Phone className="w-8 h-8 text-white" />
               </div>
               <h3 className="font-bold text-lg text-slate-800 mb-2">Phone</h3>
-              <p className="text-slate-700">+62 711 123 4567</p>
+              <p className="text-slate-700">+62 821 7446 4169</p>
             </div>
           </div>
 
