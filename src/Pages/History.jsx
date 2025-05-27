@@ -260,7 +260,7 @@ function KeyFacts(){
 function ActionSection(){
     return(
 <div className="text-center bg-gradient-to-br from-[#FAF7F3] to-[#F2ECF7] rounded-3xl p-16 border border-[#EFEAEA]">
-  <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+  <h2 className="pb-3 text-4xl font-bold mb-6 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
     Experience Palembang Today
   </h2>
   <p className="text-lg text-slate-700 mb-10 max-w-3xl mx-auto leading-relaxed">

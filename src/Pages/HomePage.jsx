@@ -16,7 +16,6 @@ import {
   Sparkles,
 } from "lucide-react";
 
-
 function HomePage() {
   return (
     <>
@@ -38,61 +37,57 @@ function HeroSection() {
   return (
     <>
       <div className="relative w-full h-screen overflow-hidden">
-
-  <video
-    autoPlay
-    muted
-    loop
-    playsInline
-    className="absolute inset-0 lg:w-full  h-full sm:w-[400px] object-cover brightness-50 "
-  >
-    <source src="/vid-banner.mp4" type="video/mp4" />
-  </video>
-
- 
-  <div className="absolute inset-0 bg-gradient-to-br from-[#316D7C]/60 via-[#8C7A66]/40 to-[#C1A175]/60 z-0" />
-
- 
-  <div className="hero-content text-center text-white relative z-10">
-    <div className="max-w-5xl">
-      <div className="mb-6">
-        <span className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 backdrop-blur-md text-white/90 text-sm font-medium border border-white/30">
-          <Sparkles className="w-4 h-4 mr-2" />
-          Discover Indonesia's Hidden Gem
-        </span>
-      </div>
-      <h1 className="mb-6 text-6xl md:text-8xl font-bold text-white drop-shadow-2xl leading-tight">
-        Wonderful{" "}
-        <span className="bg-gradient-to-r from-[#C1A175] via-[#8C7A66] to-[#316D7C] bg-clip-text text-transparent">
-          Palembang
-        </span>
-      </h1>
-      <p className="mb-10 text-xl md:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed font-light">
-        Discover the Venice of the East, where ancient traditions meet
-        modern innovation. Experience the rich culture, delicious cuisine,
-        and warm hospitality of South Sumatra's capital.
-      </p>
-      <div className="flex flex-col sm:flex-row gap-6 justify-center">
-        <Link
-          to="/attractions"
-          className="btn btn-lg rounded-full bg-gradient-to-r from-accent to-success border-0 text-white shadow-2xl hover:shadow-accent/25 hover:scale-105 transition-all duration-300"
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 lg:w-full  h-full sm:w-[400px] object-cover brightness-50 "
         >
-          <Camera className="w-5 h-5 mr-2" />
-          Explore Attractions
-          <ArrowRight className="w-5 h-5 ml-2" />
-        </Link>
-        <Link
-          href="/about"
-          className="btn btn-lg rounded-full bg-white/20 backdrop-blur-md text-white border-white/30 hover:bg-white/30 hover:scale-105 transition-all duration-300"
-        >
-          <Play className="w-5 h-5 mr-2" />
-          Learn More
-        </Link>
-      </div>
-    </div>
-  </div>
-</div>
+          <source src="/vid-banner.mp4" type="video/mp4" />
+        </video>
 
+        <div className="absolute inset-0 bg-gradient-to-br from-[#316D7C]/60 via-[#8C7A66]/40 to-[#C1A175]/60 z-0" />
+
+        <div className="hero-content text-center text-white relative z-10">
+          <div className="max-w-5xl">
+            <div className="mb-6">
+              <span className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 backdrop-blur-md text-white/90 text-sm font-medium border border-white/30">
+                <Sparkles className="w-4 h-4 mr-2" />
+                Discover Indonesia's Hidden Gem
+              </span>
+            </div>
+            <h1 className="mb-6 text-6xl md:text-8xl font-bold text-white drop-shadow-2xl leading-tight">
+              Wonderful{" "}
+              <span className="bg-gradient-to-r from-[#C1A175] via-[#8C7A66] to-[#316D7C] bg-clip-text text-transparent">
+                Palembang
+              </span>
+            </h1>
+            <p className="mb-10 text-xl md:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed font-light">
+              Discover the Venice of the East, where ancient traditions meet
+              modern innovation. Experience the rich culture, delicious cuisine,
+              and warm hospitality of South Sumatra's capital.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Link
+                to="/attractions"
+                className="btn btn-lg rounded-full bg-gradient-to-r from-accent to-success border-0 text-white shadow-2xl hover:shadow-accent/25 hover:scale-105 transition-all duration-300"
+              >
+                <Camera className="w-5 h-5 mr-2" />
+                Explore Attractions
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Link>
+              <Link
+                href="/about"
+                className="btn btn-lg rounded-full bg-white/20 backdrop-blur-md text-white border-white/30 hover:bg-white/30 hover:scale-105 transition-all duration-300"
+              >
+                <Play className="w-5 h-5 mr-2" />
+                Learn More
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
@@ -100,86 +95,93 @@ function HeroSection() {
 function StatsSection() {
   return (
     <>
- <div className="py-20 bg-gradient-to-r from-[#fdfcfb] to-[#e2d1c3]">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="group">
-            <div className="relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-8 border border-slate-100 hover:border-[#316D7C]/20 group-hover:scale-105 overflow-hidden">
-              <div
-                className="absolute inset-0 bg-cover bg-center opacity-35 transition-opacity duration-500 group-hover:opacity-15"
-                style={{
-                  backgroundImage: `url('/lrt.jpeg?height=400&width=600')`,
-                }}
-              />
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-[#316D7C] to-[#8C7A66] rounded-2xl flex items-center justify-center shadow-lg">
-                    <Users className="w-8 h-8 text-white" />
-                  </div>
-                  <div className="text-right">
-                    <div className="text-3xl font-bold bg-gradient-to-r from-[#316D7C] via-[#8C7A66] to-[#C1A175] bg-clip-text text-transparent">
-                      1.7M+
+      <div className="py-20 bg-gradient-to-r from-[#fdfcfb] to-[#e2d1c3]">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="group">
+              <div className="relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-8 border border-slate-100 hover:border-[#316D7C]/20 group-hover:scale-105 overflow-hidden">
+                <div
+                  className="absolute inset-0 bg-cover bg-center opacity-35 transition-opacity duration-500 group-hover:opacity-15"
+                  style={{
+                    backgroundImage: `url('/lrt.jpeg?height=400&width=600')`,
+                  }}
+                />
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-[#316D7C] to-[#8C7A66] rounded-2xl flex items-center justify-center shadow-lg">
+                      <Users className="w-8 h-8 text-white" />
                     </div>
-                    <div className="text-slate-600 font-medium">Population</div>
+                    <div className="text-right">
+                      <div className="text-3xl font-bold bg-gradient-to-r from-[#316D7C] via-[#8C7A66] to-[#C1A175] bg-clip-text text-transparent">
+                        1.7M+
+                      </div>
+                      <div className="text-slate-600 font-medium">
+                        Population
+                      </div>
+                    </div>
                   </div>
+                  <p className="text-slate-500">
+                    Friendly locals ready to welcome you
+                  </p>
                 </div>
-                <p className="text-slate-500">Friendly locals ready to welcome you</p>
               </div>
             </div>
-          </div>
-          <div className="group">
-            <div className="relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-8 border border-slate-100 hover:border-[#8C7A66]/20 group-hover:scale-105 overflow-hidden">
-            
-              <div
-                className="absolute inset-0 bg-cover bg-center opacity-35 transition-opacity duration-500 group-hover:opacity-15"
-                style={{
-                  backgroundImage: `url('/ampera-dulu.jpg?height=400&width=600')`,
-                }}
-              />
+            <div className="group">
+              <div className="relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-8 border border-slate-100 hover:border-[#8C7A66]/20 group-hover:scale-105 overflow-hidden">
+                <div
+                  className="absolute inset-0 bg-cover bg-center opacity-35 transition-opacity duration-500 group-hover:opacity-15"
+                  style={{
+                    backgroundImage: `url('/ampera-dulu.jpg?height=400&width=600')`,
+                  }}
+                />
 
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-[#8C7A66] to-[#C1A175] rounded-2xl flex items-center justify-center shadow-lg">
-                    <Calendar className="w-8 h-8 text-white" />
-                  </div>
-                  <div className="text-right">
-                    <div className="text-3xl font-bold bg-gradient-to-r from-[#8C7A66] to-[#C1A175] bg-clip-text text-transparent">
-                      682 AD
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-[#8C7A66] to-[#C1A175] rounded-2xl flex items-center justify-center shadow-lg">
+                      <Calendar className="w-8 h-8 text-white" />
                     </div>
-                    <div className="text-slate-600 font-medium">Founded</div>
+                    <div className="text-right">
+                      <div className="text-3xl font-bold bg-gradient-to-r from-[#8C7A66] to-[#C1A175] bg-clip-text text-transparent">
+                        682 AD
+                      </div>
+                      <div className="text-slate-600 font-medium">Founded</div>
+                    </div>
                   </div>
+                  <p className="text-slate-500">
+                    Over 1,300 years of rich history
+                  </p>
                 </div>
-                <p className="text-slate-500">Over 1,300 years of rich history</p>
               </div>
             </div>
-          </div>
-          <div className="group">
-            <div className="relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-8 border border-slate-100 hover:border-[#C1A175]/20 group-hover:scale-105 overflow-hidden">
-              <div
-                className="absolute inset-0 bg-cover bg-center opacity-35 transition-opacity duration-500 group-hover:opacity-15"
-                style={{
-                  backgroundImage: `url('/musi.jpeg?height=400&width=600')`,
-                }}
-              />
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-[#C1A175] to-[#316D7C] rounded-2xl flex items-center justify-center shadow-lg">
-                    <MapPin className="w-8 h-8 text-white" />
-                  </div>
-                  <div className="text-right">
-                    <div className="text-3xl font-bold bg-gradient-to-r from-[#C1A175] to-[#316D7C] bg-clip-text text-transparent">
-                      400 km²
+            <div className="group">
+              <div className="relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-8 border border-slate-100 hover:border-[#C1A175]/20 group-hover:scale-105 overflow-hidden">
+                <div
+                  className="absolute inset-0 bg-cover bg-center opacity-35 transition-opacity duration-500 group-hover:opacity-15"
+                  style={{
+                    backgroundImage: `url('/musi.jpeg?height=400&width=600')`,
+                  }}
+                />
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-[#C1A175] to-[#316D7C] rounded-2xl flex items-center justify-center shadow-lg">
+                      <MapPin className="w-8 h-8 text-white" />
                     </div>
-                    <div className="text-slate-600 font-medium">Area</div>
+                    <div className="text-right">
+                      <div className="text-3xl font-bold bg-gradient-to-r from-[#C1A175] to-[#316D7C] bg-clip-text text-transparent">
+                        400 km²
+                      </div>
+                      <div className="text-slate-600 font-medium">Area</div>
+                    </div>
                   </div>
+                  <p className="text-slate-500">
+                    Urban paradise along the Musi River
+                  </p>
                 </div>
-                <p className="text-slate-500">Urban paradise along the Musi River</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 }
@@ -285,7 +287,7 @@ function Section4() {
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link
-                href="/contact"
+                to="/contact"
                 className="btn btn-lg rounded-full bg-white text-primary hover:bg-white/90 border-0 shadow-2xl hover:shadow-white/25 hover:scale-105 transition-all duration-300"
               >
                 <Calendar className="w-5 h-5 mr-2" />
@@ -293,7 +295,7 @@ function Section4() {
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
               <Link
-                href="/attractions"
+                to="/attractions"
                 className="btn btn-lg rounded-full bg-white/20 backdrop-blur-md text-white border-white/30 hover:bg-white/30 hover:scale-105 transition-all duration-300"
               >
                 <Camera className="w-5 h-5 mr-2" />
