@@ -1,9 +1,6 @@
 import React from "react";
 import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
-import { RiGlobalLine } from "react-icons/ri";
-import { FiCoffee } from "react-icons/fi";
-import { LuLeaf } from "react-icons/lu";
 import Footer from "./Footer";
 import {
   Play,
