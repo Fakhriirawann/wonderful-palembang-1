@@ -12,7 +12,8 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
+
 
 function ContactPage() {
   return (
@@ -65,6 +66,7 @@ function HeroSection() {
   );
 }
 
+
 function FormContact() {
   const [showToast, setShowToast] = useState(false);
 
@@ -90,7 +92,7 @@ function FormContact() {
   return (
     <div className="container mx-auto px-4 py-20">
       {showToast && (
-        <div className="absolute top-4 right-4 bg-gradient-to-r from-[#D8A47F] to-[#A58CAA] text-white px-6 py-3 rounded-xl shadow-lg z-10">
+        <div className="fixed top-4 right-4 bg-gradient-to-r from-[#D8A47F] to-[#A58CAA] text-white px-6 py-3 rounded-xl shadow-lg transition-all duration-300 z-50">
           🎉 Message sent successfully!
         </div>
       )}
@@ -100,85 +102,46 @@ function FormContact() {
             <Send className="w-4 h-4 mr-2" />
             Send Message
           </div>
-          <h2 className="text-3xl font-bold text-slate-800">
-            Let's Plan Your Journey
-          </h2>
+          <h2 className="text-3xl font-bold text-slate-800">Let's Plan Your Journey</h2>
         </div>
 
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="form-control">
               <label className="label">
-                <span className="pr-20 label-text font-medium text-slate-700">
-                  Full Name
-                </span>
+                <span className="pr-20 label-text font-medium text-slate-700">Full Name</span>
               </label>
-              <input
-                name="name"
-                type="text"
-                required
-                placeholder="Enter your full name"
-                className="input input-bordered rounded-2xl border-[#E2D5CB] focus:border-[#D8A47F] focus:ring-2 focus:ring-[#D8A47F]/30 transition-all duration-300"
-              />
+              <input name="name" type="text" required placeholder="Enter your full name" className="input input-bordered rounded-2xl border-[#E2D5CB] focus:border-[#D8A47F] focus:ring-2 focus:ring-[#D8A47F]/30 transition-all duration-300" />
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="pr-8 label-text font-medium text-slate-700">
-                  Email Address
-                </span>
+                <span className="pr-8 label-text font-medium text-slate-700">Email Address</span>
               </label>
-              <input
-                name="email"
-                type="email"
-                required
-                placeholder="Enter your email"
-                className="input input-bordered rounded-2xl border-[#E2D5CB] focus:border-[#D8A47F] focus:ring-2 focus:ring-[#D8A47F]/30 transition-all duration-300"
-              />
+              <input name="email" type="email" required placeholder="Enter your email" className="input input-bordered rounded-2xl border-[#E2D5CB] focus:border-[#D8A47F] focus:ring-2 focus:ring-[#D8A47F]/30 transition-all duration-300" />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="form-control">
               <label className="label">
-                <span className="pr-10 label-text font-medium text-slate-700">
-                  Phone Number
-                </span>
+                <span className="pr-10 label-text font-medium text-slate-700">Phone Number</span>
               </label>
-              <input
-                name="phone"
-                type="tel"
-                placeholder="Enter your phone number"
-                className="input input-bordered rounded-2xl border-[#E2D5CB] focus:border-[#D8A47F] focus:ring-2 focus:ring-[#D8A47F]/30 transition-all duration-300"
-              />
+              <input name="phone" type="tel" placeholder="Enter your phone number" className="input input-bordered rounded-2xl border-[#E2D5CB] focus:border-[#D8A47F] focus:ring-2 focus:ring-[#D8A47F]/30 transition-all duration-300" />
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="pr-15 label-text font-medium text-slate-700">
-                  Visit Date
-                </span>
+                <span className="pr-15 label-text font-medium text-slate-700">Visit Date</span>
               </label>
-              <input
-                name="visit_date"
-                type="date"
-                className="input input-bordered rounded-2xl border-[#E2D5CB] focus:border-[#D8A47F] focus:ring-2 focus:ring-[#D8A47F]/30 transition-all duration-300"
-              />
+              <input name="visit_date" type="date" className="input input-bordered rounded-2xl border-[#E2D5CB] focus:border-[#D8A47F] focus:ring-2 focus:ring-[#D8A47F]/30 transition-all duration-300" />
             </div>
           </div>
 
           <div className="form-control flex gap-3">
             <label className="label">
-              <span className="label-text font-medium text-slate-700">
-                Number of Visitors
-              </span>
+              <span className="label-text font-medium text-slate-700">Number of Visitors</span>
             </label>
-            <select
-              name="visitors"
-              required
-              className="pl-2 select select-bordered rounded-2xl border-[#E2D5CB] focus:border-[#D8A47F] focus:ring-2 focus:ring-[#D8A47F]/30 transition-all duration-300"
-            >
-              <option disabled selected>
-                Select number of visitors
-              </option>
+            <select name="visitors" required className="pl-2 select select-bordered rounded-2xl border-[#E2D5CB] focus:border-[#D8A47F] focus:ring-2 focus:ring-[#D8A47F]/30 transition-all duration-300">
+              <option disabled selected>Select number of visitors</option>
               <option>1 person</option>
               <option>2-5 people</option>
               <option>6-10 people</option>
@@ -188,23 +151,13 @@ function FormContact() {
 
           <div className="form-control">
             <label className="label">
-              <span className="pr-20 label-text font-medium text-slate-700">
-                Message
-              </span>
+              <span className="pr-20 label-text font-medium text-slate-700">Message</span>
             </label>
-            <textarea
-              name="message"
-              required
-              className="textarea textarea-bordered rounded-2xl border-[#E2D5CB] focus:border-[#D8A47F] focus:ring-2 focus:ring-[#D8A47F]/30 transition-all duration-300 h-32"
-              placeholder="Tell us about your travel plans and interests"
-            ></textarea>
+            <textarea name="message" required className="textarea textarea-bordered rounded-2xl border-[#E2D5CB] focus:border-[#D8A47F] focus:ring-2 focus:ring-[#D8A47F]/30 transition-all duration-300 h-32" placeholder="Tell us about your travel plans and interests"></textarea>
           </div>
 
           <div className="form-control mt-8">
-            <button
-              type="submit"
-              className="btn btn-lg rounded-full bg-gradient-to-r from-[#D8A47F] to-[#A58CAA] border-0 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-            >
+            <button type="submit" className="btn btn-lg rounded-full bg-gradient-to-r from-[#D8A47F] to-[#A58CAA] border-0 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
               <Send className="w-5 h-5 mr-2" />
               Send Message
               <ArrowRight className="w-5 h-5 ml-2" />
