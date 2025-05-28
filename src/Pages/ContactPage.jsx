@@ -93,7 +93,7 @@ function FormContact() {
     <div className="container mx-auto px-4 py-20">
       {showToast && (
         <div className="fixed top-4 right-4 bg-gradient-to-r from-[#D8A47F] to-[#A58CAA] text-white px-6 py-3 rounded-xl shadow-lg transition-all duration-300 z-50">
-          🎉 Message sent successfully!
+          🎉 Message sent successfully to our Email!
         </div>
       )}
       <div className="bg-white rounded-3xl shadow-2xl p-8 lg:p-12 border border-[#F1EAE5]">
