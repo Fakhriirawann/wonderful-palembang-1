@@ -11,20 +11,24 @@ import {
   Star,
   ArrowRight,
   Sparkles,
+  Layers,
+  Compass,
 } from "lucide-react";
+import AmperaCanvas3D from "../components/3d/AmperaCanvas3D";
+import TiltCard3D from "../components/3d/TiltCard3D";
+import FloatingElements3D from "../components/3d/FloatingElements3D";
 
 function HomePage() {
   return (
-    <>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-        <NavBar />
-        <HeroSection />
-        <StatsSection />
-        <Section3 />
-        <Section4 />
-        <Footer />
-      </div>
-    </>
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
+      <NavBar />
+      <HeroSection />
+      <Interactive3DSection />
+      <StatsSection />
+      <Section3 />
+      <Section4 />
+      <Footer />
+    </div>
   );
 }
 
@@ -32,277 +36,281 @@ export default HomePage;
 
 function HeroSection() {
   return (
-    <>
-      <div className="relative w-full min-h-screen overflow-hidden flex items-center justify-center">
-  <video
-    autoPlay
-    muted
-    loop
-    playsInline
-    className="absolute inset-0 w-full h-full object-cover brightness-50"
-  >
-    <source src="/vid-banner.mp4" type="video/mp4" />
-  </video>
-
-  <div className="absolute inset-0 bg-gradient-to-br from-[#316D7C]/60 via-[#8C7A66]/40 to-[#C1A175]/60 z-0" />
-
-  <div className="relative z-10 text-center text-white px-4 py-12 sm:px-8 max-w-5xl">
-    <div className="mb-6">
-      <span className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 backdrop-blur-md text-white/90 text-sm font-medium border border-white/30">
-        <Sparkles className="w-4 h-4 mr-2" />
-        Discover Indonesia's Hidden Gem
-      </span>
-    </div>
-
-    <h1 className="mb-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white drop-shadow-2xl leading-tight">
-      Wonderful{" "}
-      <span className="bg-gradient-to-r from-[#C1A175] via-[#8C7A66] to-[#316D7C] bg-clip-text text-transparent">
-        Palembang
-      </span>
-    </h1>
-
-    <p className="mb-10 text-base sm:text-lg md:text-xl text-white/90 max-w-4xl mx-auto leading-relaxed font-light">
-      Discover the Venice of the East, where ancient traditions meet modern innovation. Experience the rich culture,
-      delicious cuisine, and warm hospitality of South Sumatra's capital.
-    </p>
-
-    <div className="flex flex-col sm:flex-row gap-6 justify-center">
-      <Link
-        to="/attractions"
-        className="btn btn-lg rounded-full bg-gradient-to-r from-accent to-success border-0 text-white shadow-2xl hover:shadow-accent/25 hover:scale-105 transition-all duration-300"
+    <div className="relative w-full min-h-screen overflow-hidden flex items-center justify-center pt-16">
+      {/* Background Video */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover brightness-50 dark:brightness-[0.35]"
       >
-        <Camera className="w-5 h-5 mr-2" />
-        Explore Attractions
-        <ArrowRight className="w-5 h-5 ml-2" />
-      </Link>
-      <Link
-        to="/history"
-        className="btn btn-lg rounded-full bg-white/20 backdrop-blur-md text-white border-white/30 hover:bg-white/30 hover:scale-105 transition-all duration-300"
-      >
-        <Play className="w-5 h-5 mr-2" />
-        Learn More
-      </Link>
-    </div>
-  </div>
-</div>
+        <source src="/vid-banner.mp4" type="video/mp4" />
+      </video>
 
-    </>
+      {/* 3D Floating Objects */}
+      <FloatingElements3D variant="hero" />
+
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#316D7C]/70 via-[#8C7A66]/40 to-[#C1A175]/60 dark:from-slate-950/80 dark:via-slate-900/60 dark:to-cyan-950/70 z-0" />
+
+      {/* Hero Content */}
+      <div className="relative z-10 text-center text-white px-4 py-12 sm:px-8 max-w-5xl">
+        <div className="mb-6 inline-block">
+          <span className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 dark:bg-slate-900/60 backdrop-blur-md text-white/95 text-xs sm:text-sm font-medium border border-white/30 dark:border-white/10 shadow-lg">
+            <Sparkles className="w-4 h-4 mr-2 text-amber-300 animate-spin" style={{ animationDuration: "6s" }} />
+            Discover Indonesia's Hidden Gem
+          </span>
+        </div>
+
+        <h1 className="mb-6 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white drop-shadow-2xl leading-tight tracking-tight">
+          Wonderful{" "}
+          <span className="bg-gradient-to-r from-[#FDE68A] via-[#C1A175] to-[#67E8F9] dark:from-[#38bdf8] dark:via-[#fbbf24] dark:to-[#34d399] bg-clip-text text-transparent">
+            Palembang
+          </span>
+        </h1>
+
+        <p className="mb-10 text-base sm:text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed font-light drop-shadow">
+          Discover the Venice of the East, where ancient traditions meet modern innovation.
+          Experience the rich culture, delicious cuisine, and warm hospitality along the mighty Musi River.
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+          <Link
+            to="/attractions"
+            className="w-full sm:w-auto btn btn-lg rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 border-0 text-white shadow-2xl hover:shadow-cyan-500/30 hover:scale-105 active:scale-95 transition-all duration-300"
+          >
+            <Camera className="w-5 h-5 mr-2" />
+            Explore Attractions
+            <ArrowRight className="w-5 h-5 ml-2" />
+          </Link>
+          <Link
+            to="/history"
+            className="w-full sm:w-auto btn btn-lg rounded-full bg-white/20 dark:bg-slate-900/60 backdrop-blur-md text-white border-white/30 dark:border-slate-700 hover:bg-white/30 dark:hover:bg-slate-800 hover:scale-105 active:scale-95 transition-all duration-300"
+          >
+            <Play className="w-5 h-5 mr-2 text-amber-300" />
+            Learn History
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Interactive3DSection() {
+  return (
+    <div className="py-20 bg-gradient-to-b from-slate-100 to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 relative overflow-hidden transition-colors duration-300">
+      <div className="container mx-auto px-4 sm:px-6">
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 dark:from-cyan-950/80 dark:to-teal-950/80 text-primary dark:text-cyan-300 text-xs sm:text-sm font-semibold mb-4 border border-primary/20 dark:border-cyan-800/40">
+            <Compass className="w-4 h-4 mr-2" />
+            Eksplorasi Virtual 3D Real-Time
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-black mb-4 bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 dark:from-white dark:via-slate-200 dark:to-slate-400 bg-clip-text text-transparent">
+            Ikon Jembatan Ampera & Sungai Musi
+          </h2>
+          <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+            Putar sudut pandang 360°, amati pergerakan perahu ketek dan gemerlap lampu malam Ampera
+            yang berganti dinamis sesuai tema Light/Dark mode.
+          </p>
+        </div>
+
+        {/* 3D Canvas Visualizer */}
+        <div className="max-w-5xl mx-auto">
+          <AmperaCanvas3D />
+        </div>
+      </div>
+    </div>
   );
 }
 
 function StatsSection() {
-  return (
-    <>
-      <div className="py-20 bg-gradient-to-r from-[#fdfcfb] to-[#e2d1c3]">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="group">
-              <div className="relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-8 border border-slate-100 hover:border-[#316D7C]/20 group-hover:scale-105 overflow-hidden">
-                <div
-                  className="absolute inset-0 bg-cover bg-center opacity-35 transition-opacity duration-500 group-hover:opacity-15"
-                  style={{
-                    backgroundImage: `url('/lrt.jpeg?height=400&width=600')`,
-                  }}
-                />
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#316D7C] to-[#8C7A66] rounded-2xl flex items-center justify-center shadow-lg">
-                      <Users className="w-8 h-8 text-white" />
-                    </div>
-                    <div className="text-right">
-                      <div className="text-3xl font-bold bg-gradient-to-r from-[#316D7C] via-[#8C7A66] to-[#C1A175] bg-clip-text text-transparent">
-                        1.7M+
-                      </div>
-                      <div className="text-slate-600 font-medium">
-                        Population
-                      </div>
-                    </div>
-                  </div>
-                  <p className="text-slate-500">
-                    Friendly locals ready to welcome you
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="group">
-              <div className="relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-8 border border-slate-100 hover:border-[#8C7A66]/20 group-hover:scale-105 overflow-hidden">
-                <div
-                  className="absolute inset-0 bg-cover bg-center opacity-35 transition-opacity duration-500 group-hover:opacity-15"
-                  style={{
-                    backgroundImage: `url('/ampera-dulu.jpg?height=400&width=600')`,
-                  }}
-                />
+  const stats = [
+    {
+      icon: Users,
+      value: "1.7M+",
+      label: "Population",
+      desc: "Friendly locals ready to welcome you warmly",
+      bgImage: "/lrt.jpeg?height=400&width=600",
+      gradient: "from-[#316D7C] to-[#8C7A66]",
+      borderHover: "hover:border-[#316D7C]/30",
+    },
+    {
+      icon: Calendar,
+      value: "682 AD",
+      label: "Founded",
+      desc: "Over 1,300 years of rich historic legacy",
+      bgImage: "/ampera-dulu.jpg?height=400&width=600",
+      gradient: "from-[#8C7A66] to-[#C1A175]",
+      borderHover: "hover:border-[#8C7A66]/30",
+    },
+    {
+      icon: MapPin,
+      value: "400 km²",
+      label: "City Area",
+      desc: "Urban paradise majestically along the Musi River",
+      bgImage: "/musi.jpeg?height=400&width=600",
+      gradient: "from-[#C1A175] to-[#316D7C]",
+      borderHover: "hover:border-[#C1A175]/30",
+    },
+  ];
 
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#8C7A66] to-[#C1A175] rounded-2xl flex items-center justify-center shadow-lg">
-                      <Calendar className="w-8 h-8 text-white" />
-                    </div>
-                    <div className="text-right">
-                      <div className="text-3xl font-bold bg-gradient-to-r from-[#8C7A66] to-[#C1A175] bg-clip-text text-transparent">
-                        682 AD
+  return (
+    <div className="py-20 bg-gradient-to-r from-[#fdfcfb] to-[#e2d1c3] dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors duration-300">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {stats.map((stat, idx) => {
+            const Icon = stat.icon;
+            return (
+              <TiltCard3D key={idx} maxTilt={14} scale={1.03}>
+                <div className={`relative bg-white dark:bg-slate-800/90 rounded-3xl shadow-xl dark:shadow-slate-950/50 p-8 border border-slate-100 dark:border-slate-700/70 ${stat.borderHover} overflow-hidden h-full flex flex-col justify-between`}>
+                  <div
+                    className="absolute inset-0 bg-cover bg-center opacity-25 dark:opacity-15 transition-opacity duration-500"
+                    style={{
+                      backgroundImage: `url('${stat.bgImage}')`,
+                    }}
+                  />
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-4">
+                      <div
+                        className={`w-16 h-16 bg-gradient-to-br ${stat.gradient} rounded-2xl flex items-center justify-center shadow-lg text-white`}
+                        style={{ transform: "translateZ(25px)" }}
+                      >
+                        <Icon className="w-8 h-8" />
                       </div>
-                      <div className="text-slate-600 font-medium">Founded</div>
-                    </div>
-                  </div>
-                  <p className="text-slate-500">
-                    Over 1,300 years of rich history
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="group">
-              <div className="relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-8 border border-slate-100 hover:border-[#C1A175]/20 group-hover:scale-105 overflow-hidden">
-                <div
-                  className="absolute inset-0 bg-cover bg-center opacity-35 transition-opacity duration-500 group-hover:opacity-15"
-                  style={{
-                    backgroundImage: `url('/musi.jpeg?height=400&width=600')`,
-                  }}
-                />
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#C1A175] to-[#316D7C] rounded-2xl flex items-center justify-center shadow-lg">
-                      <MapPin className="w-8 h-8 text-white" />
-                    </div>
-                    <div className="text-right">
-                      <div className="text-3xl font-bold bg-gradient-to-r from-[#C1A175] to-[#316D7C] bg-clip-text text-transparent">
-                        400 km²
+                      <div className="text-right" style={{ transform: "translateZ(20px)" }}>
+                        <div className="text-3xl font-extrabold bg-gradient-to-r from-[#316D7C] via-[#8C7A66] to-[#C1A175] dark:from-cyan-400 dark:via-amber-300 dark:to-teal-300 bg-clip-text text-transparent">
+                          {stat.value}
+                        </div>
+                        <div className="text-slate-600 dark:text-slate-300 font-semibold text-sm">
+                          {stat.label}
+                        </div>
                       </div>
-                      <div className="text-slate-600 font-medium">Area</div>
                     </div>
+                    <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mt-2" style={{ transform: "translateZ(10px)" }}>
+                      {stat.desc}
+                    </p>
                   </div>
-                  <p className="text-slate-500">
-                    Urban paradise along the Musi River
-                  </p>
                 </div>
-              </div>
-            </div>
-          </div>
+              </TiltCard3D>
+            );
+          })}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
 function Section3() {
+  const experiences = [
+    {
+      img: "/museum.jpeg",
+      title: "Rich Heritage",
+      desc: "Explore ancient Srivijaya kingdom ruins and traditional architecture that tells stories of centuries past.",
+      tag: "Heritage",
+      color: "border-primary/20",
+    },
+    {
+      img: "/pempek.jpeg",
+      title: "Culinary Paradise",
+      desc: "Taste authentic Pempek, Tekwan, and other local delicacies that will tantalize your taste buds.",
+      tag: "Gastronomy",
+      color: "border-amber-500/20",
+    },
+    {
+      img: "/ampera.jpeg",
+      title: "River City",
+      desc: "Experience life along the mighty Musi River and its vibrant floating culture and scenic bridges.",
+      tag: "River Culture",
+      color: "border-cyan-500/20",
+    },
+  ];
+
   return (
-    <>
-      <div className="py-24 bg-gradient-to-r from-slate-50 to-teal-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 text-primary font-medium mb-6">
-              <Star className="w-4 h-4 mr-2" />
-              Why Choose Palembang
-            </div>
-            <h2 className="pb-3 text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
-              Unforgettable Experiences
-            </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              Discover what makes our city special and creates lasting memories
-            </p>
+    <div className="py-24 bg-gradient-to-r from-slate-50 to-teal-50/50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 transition-colors duration-300">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 dark:from-primary/20 dark:to-secondary/20 text-primary dark:text-teal-300 font-semibold text-sm mb-4">
+            <Star className="w-4 h-4 mr-2" />
+            Why Choose Palembang
           </div>
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 bg-gradient-to-r from-slate-800 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
+            Unforgettable Experiences
+          </h2>
+          <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-base">
+            Discover what makes our historic city magical and creates lasting memories for every traveler.
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="group">
-              <div className="bg-white rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 border border-primary/10 group-hover:scale-105">
-                <div className="w-full h-48 mb-6 overflow-hidden rounded-2xl shadow-lg">
-                  <img
-                    src="\museum.jpeg"
-                    alt="Rich Heritage"
-                    className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
-                  />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {experiences.map((exp, idx) => (
+            <TiltCard3D key={idx} maxTilt={10} scale={1.03}>
+              <div className={`bg-white dark:bg-slate-800/90 rounded-3xl p-6 sm:p-8 shadow-xl dark:shadow-slate-950/40 border border-slate-200/80 dark:border-slate-700/70 h-full flex flex-col justify-between overflow-hidden group`}>
+                <div>
+                  <div className="w-full h-52 mb-6 overflow-hidden rounded-2xl shadow-md relative">
+                    <img
+                      src={exp.img}
+                      alt={exp.title}
+                      className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-slate-800 dark:text-slate-200 shadow">
+                      {exp.tag}
+                    </span>
+                  </div>
+                  <h3 className="text-2xl font-bold mb-3 text-slate-800 dark:text-white group-hover:text-primary dark:group-hover:text-cyan-400 transition-colors" style={{ transform: "translateZ(15px)" }}>
+                    {exp.title}
+                  </h3>
+                  <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed" style={{ transform: "translateZ(8px)" }}>
+                    {exp.desc}
+                  </p>
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-slate-800">
-                  Rich Heritage
-                </h3>
-                <p className="text-slate-600 leading-relaxed">
-                  Explore ancient Srivijaya kingdom ruins and traditional
-                  architecture that tells stories of centuries past.
-                </p>
               </div>
-            </div>
-
-            <div className="group">
-              <div className="bg-white rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 border border-secondary/10 group-hover:scale-105">
-                <div className="w-full h-48 mb-6 overflow-hidden rounded-2xl shadow-lg">
-                  <img
-                    src="\pempek.jpeg"
-                    alt="Culinary Paradise"
-                    className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-                <h3 className="text-2xl font-bold mb-4 text-slate-800">
-                  Culinary Paradise
-                </h3>
-                <p className="text-slate-600 leading-relaxed">
-                  Taste authentic Pempek, Tekwan, and other local delicacies
-                  that will tantalize your taste buds.
-                </p>
-              </div>
-            </div>
-
-            <div className="group">
-              <div className="bg-white rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 border border-accent/10 group-hover:scale-105">
-                <div className="w-full h-48 mb-6 overflow-hidden rounded-2xl shadow-lg">
-                  <img
-                    src="\ampera.jpeg"
-                    alt="River City"
-                    className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-                <h3 className="text-2xl font-bold mb-4 text-slate-800">
-                  River City
-                </h3>
-                <p className="text-slate-600 leading-relaxed">
-                  Experience life along the mighty Musi River and its vibrant
-                  floating markets.
-                </p>
-              </div>
-            </div>
-          </div>
+            </TiltCard3D>
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
 function Section4() {
   return (
-    <>
-      <div className="py-24 bg-gradient-to-br from-[#316D7C] via-[#8C7A66] to-[#C1A175] relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsUnVsZT0iZXZlbm9kZCI+PGcgZmlsbD0iI2ZmZmZmZiIgZmlsbE9wYWNpdHk9IjAuMSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-20"></div>
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-8 leading-tight">
-              Ready to Explore{" "}
-              <span className="bg-gradient-to-r from-[#C1A175] to-[#8C7A66] bg-clip-text text-transparent">
-                Palembang?
-              </span>
-            </h2>
-            <p className="text-xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Join thousands of visitors who have fallen in love with our
-              beautiful city and created unforgettable memories
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Link
-                to="/contact"
-                className="btn btn-lg rounded-full bg-white text-primary hover:bg-white/90 border-0 shadow-2xl hover:shadow-white/25 hover:scale-105 transition-all duration-300"
-              >
-                <Calendar className="w-5 h-5 mr-2" />
-                Plan Your Visit
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Link>
-              <Link
-                to="/attractions"
-                className="btn btn-lg rounded-full bg-white/20 backdrop-blur-md text-white border-white/30 hover:bg-white/30 hover:scale-105 transition-all duration-300"
-              >
-                <Camera className="w-5 h-5 mr-2" />
-                View Destinations
-              </Link>
-            </div>
+    <div className="py-24 bg-gradient-to-br from-[#316D7C] via-[#8C7A66] to-[#C1A175] dark:from-slate-900 dark:via-slate-800 dark:to-cyan-950 relative overflow-hidden transition-colors duration-300">
+      {/* 3D Floating Decorations */}
+      <FloatingElements3D variant="section" />
+
+      <div className="container mx-auto px-4 text-center relative z-10">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl sm:text-6xl font-black text-white mb-6 leading-tight drop-shadow-lg">
+            Ready to Explore{" "}
+            <span className="bg-gradient-to-r from-[#FDE68A] to-[#FBBF24] dark:from-cyan-300 dark:to-amber-300 bg-clip-text text-transparent">
+              Palembang?
+            </span>
+          </h2>
+          <p className="text-base sm:text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
+            Join thousands of travelers who have fallen in love with our rich heritage,
+            culinary wonders, and stunning river landscapes.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/contact"
+              className="btn btn-lg rounded-full bg-white dark:bg-cyan-500 text-primary dark:text-slate-950 font-bold hover:bg-slate-100 dark:hover:bg-cyan-400 border-0 shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300"
+            >
+              <Calendar className="w-5 h-5 mr-2" />
+              Plan Your Visit
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Link>
+            <Link
+              to="/attractions"
+              className="btn btn-lg rounded-full bg-white/20 dark:bg-slate-900/60 backdrop-blur-md text-white border-white/40 dark:border-slate-700 hover:bg-white/30 dark:hover:bg-slate-800 hover:scale-105 active:scale-95 transition-all duration-300"
+            >
+              <Camera className="w-5 h-5 mr-2" />
+              View Destinations
+            </Link>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

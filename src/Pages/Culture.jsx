@@ -7,44 +7,47 @@ import {
   ArrowRight,
   Sparkles,
   Heart,
+  Layers,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import HeritageModelViewer3D from "../components/3d/HeritageModelViewer3D";
+import TiltCard3D from "../components/3d/TiltCard3D";
+
 function Culture() {
   return (
-    <div>
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <NavBar />
       <HeroSection />
       <CultureSection />
-      <ActionSection/>
+      <ActionSection />
       <Footer />
     </div>
   );
 }
 
 export default Culture;
+
 function HeroSection() {
   return (
-    <div className="hero min-h-[70vh] bg-gradient-to-br from-[#C1A175] via-[#316D7C] to-[#8C7A66] mt-16 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsUnVsZT0iZXZlbm9kZCI+PGcgZmlsbD0iI2ZmZmZmZiIgZmlsbE9wYWNpdHk9IjAuMSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-20"></div>
+    <div className="hero min-h-[65vh] bg-gradient-to-br from-[#C1A175] via-[#316D7C] to-[#8C7A66] dark:from-slate-950 dark:via-slate-900 dark:to-cyan-950 mt-16 relative overflow-hidden transition-colors duration-300">
       <div className="hero-content text-center text-white relative z-10">
-        <div className="max-w-5xl">
-          <div className="mb-6">
-            <span className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 backdrop-blur-md text-white/90 text-sm font-medium border border-white/30">
-              <Heart className="w-4 h-4 mr-2" />
+        <div className="max-w-4xl">
+          <div className="mb-6 inline-block">
+            <span className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 dark:bg-slate-900/60 backdrop-blur-md text-white/90 text-xs sm:text-sm font-medium border border-white/30 dark:border-slate-700">
+              <Heart className="w-4 h-4 mr-2 text-rose-300" />
               Living Heritage
             </span>
           </div>
-          <h1 className="mb-6 text-6xl md:text-7xl font-bold text-white drop-shadow-2xl">
+          <h1 className="mb-6 text-5xl sm:text-6xl md:text-7xl font-black text-white drop-shadow-2xl">
             Culture &{" "}
-            <span className="bg-gradient-to-r from-[#C1A175] via-[#8C7A66] to-[#316D7C] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#FDE68A] via-[#C1A175] to-[#67E8F9] dark:from-[#38bdf8] dark:via-[#fbbf24] dark:to-[#34d399] bg-clip-text text-transparent">
               Heritage
             </span>
           </h1>
-          <p className="mb-8 text-xl md:text-2xl text-white/90 leading-relaxed font-light">
-            Immerse yourself in the rich traditions and vibrant culture of
-            Palembang
+          <p className="mb-8 text-lg sm:text-xl text-white/90 leading-relaxed font-light max-w-2xl mx-auto">
+            Immerse yourself in the millennia-old traditions, royal artistry, and vibrant culinary soul of Palembang.
           </p>
           <div className="breadcrumbs text-sm text-white/80 justify-center">
             <ul>
@@ -61,344 +64,309 @@ function HeroSection() {
     </div>
   );
 }
+
 function CultureSection() {
+  const pillars = [
+    {
+      icon: Utensils,
+      title: "Culinary Arts",
+      desc: "Famous for Pempek, Tekwan, and traditional spices that tell stories of centuries-old maritime trade.",
+      bgImage: "/pempek.jpeg?height=400&width=600",
+      gradient: "from-primary to-secondary",
+    },
+    {
+      icon: Music,
+      title: "Traditional Music",
+      desc: "Rich musical heritage including Gambus, Batanghari Sembilan, and noble royal melodies.",
+      bgImage: "/gambus.jpeg?height=400&width=600",
+      gradient: "from-secondary to-accent",
+    },
+    {
+      icon: Palette,
+      title: "Arts & Crafts",
+      desc: "Exquisite gold-threaded Songket weaving, authentic wood carvings, and traditional lacquerware.",
+      bgImage: "/songket.jpeg?height=400&width=600",
+      gradient: "from-accent to-emerald-600",
+    },
+    {
+      icon: Users,
+      title: "Festivals",
+      desc: "Vibrant boat races and annual cultural pageants celebrating the enduring spirit of Sriwijaya.",
+      bgImage: "/pacu-jalur.jpeg?height=400&width=600",
+      gradient: "from-emerald-600 to-primary",
+    },
+  ];
+
   return (
     <div className="container mx-auto px-4 py-20">
-      <div className="text-center mb-16">
-        <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-amber-100 to-rose-100 text-rose-600 font-medium mb-6">
+      {/* 3D Heritage Model Viewer Interactive Feature */}
+      <div className="mb-24">
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-primary/10 dark:bg-primary/20 text-primary dark:text-cyan-300 font-semibold text-xs sm:text-sm mb-4">
+            <Sparkles className="w-4 h-4 mr-2" />
+            Eksplorasi Objek 3D Interaktif
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-extrabold mb-4 bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
+            Warisan Agung Sriwijaya & Palembang
+          </h2>
+          <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-sm sm:text-base">
+            Rotasikan objek 3D 360° secara langsung untuk mengamati detail mahkota Tanjak, tenun Songket emas, Rumah Limas, dan Perahu Bidar.
+          </p>
+        </div>
+
+        <HeritageModelViewer3D />
+      </div>
+
+      {/* 4 Cultural Pillars Grid */}
+      <div className="text-center mb-12">
+        <div className="inline-flex items-center px-4 py-2 rounded-full bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 font-semibold text-xs sm:text-sm mb-4">
           <Sparkles className="w-4 h-4 mr-2" />
           Cultural Treasures
         </div>
-        <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
-          Discover Our Heritage
+        <h2 className="text-3xl sm:text-5xl font-extrabold bg-gradient-to-r from-slate-800 to-slate-600 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
+          Discover Our Living Heritage
         </h2>
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
-        <div className="group">
-          <div className="relative bg-gradient-to-br from-primary/5 to-primary/10 rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 border border-primary/10 group-hover:scale-105 overflow-hidden">
-            <div
-              className="absolute inset-0 bg-cover bg-center opacity-20 transition-opacity duration-500 group-hover:opacity-12"
-              style={{
-                backgroundImage: `url('/pempek.jpeg?height=400&width=600')`,
-              }}
-            />
-            <div className="relative z-10">
-              <div className="w-20 h-20 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:rotate-6 transition-transform duration-300">
-                <Utensils className="w-10 h-10 text-white" />
+        {pillars.map((item, idx) => {
+          const Icon = item.icon;
+          return (
+            <TiltCard3D key={idx} maxTilt={14} scale={1.03}>
+              <div className="relative bg-white dark:bg-slate-900 rounded-3xl p-8 shadow-xl dark:shadow-slate-950/50 border border-slate-200/80 dark:border-slate-800 h-full flex flex-col justify-between overflow-hidden group">
+                <div
+                  className="absolute inset-0 bg-cover bg-center opacity-20 dark:opacity-10 transition-opacity duration-500 group-hover:opacity-10"
+                  style={{ backgroundImage: `url('${item.bgImage}')` }}
+                />
+                <div className="relative z-10">
+                  <div
+                    className={`w-16 h-16 bg-gradient-to-br ${item.gradient} rounded-2xl flex items-center justify-center mb-6 shadow-lg text-white group-hover:rotate-6 transition-transform duration-300`}
+                    style={{ transform: "translateZ(25px)" }}
+                  >
+                    <Icon className="w-8 h-8" />
+                  </div>
+                  <h3
+                    className="text-xl font-bold mb-3 text-slate-800 dark:text-white"
+                    style={{ transform: "translateZ(15px)" }}
+                  >
+                    {item.title}
+                  </h3>
+                  <p
+                    className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed"
+                    style={{ transform: "translateZ(8px)" }}
+                  >
+                    {item.desc}
+                  </p>
+                </div>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-slate-800">
-                Culinary Arts
-              </h3>
-              <p className="text-slate-600 leading-relaxed">
-                Famous for Pempek, Tekwan, and other unique Palembang delicacies
-                that tell stories of our heritage
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="group">
-          <div className="relative bg-gradient-to-br from-secondary/5 to-secondary/10 rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 border border-secondary/10 group-hover:scale-105 overflow-hidden">
-            <div
-              className="absolute inset-0 bg-cover bg-center opacity-20 transition-opacity duration-500 group-hover:opacity-12"
-              style={{
-                backgroundImage: `url('/gambus.jpeg?height=400&width=600')`,
-              }}
-            />
-            <div className="relative z-10">
-              <div className="w-20 h-20 bg-gradient-to-br from-secondary to-accent rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:rotate-6 transition-transform duration-300">
-                <Music className="w-10 h-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-slate-800">
-                Traditional Music
-              </h3>
-              <p className="text-slate-600 leading-relaxed">
-                Rich musical heritage including Gambus and traditional folk
-                songs that echo through generations
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="group">
-          <div className="relative bg-gradient-to-br from-accent/5 to-accent/10 rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 border border-accent/10 group-hover:scale-105 overflow-hidden">
-            <div
-              className="absolute inset-0 bg-cover bg-center opacity-30 transition-opacity duration-500 group-hover:opacity-12"
-              style={{
-                backgroundImage: `url('/songket.jpeg?height=400&width=600')`,
-              }}
-            />
-            <div className="relative z-10">
-              <div className="w-20 h-20 bg-gradient-to-br from-accent to-success rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:rotate-6 transition-transform duration-300">
-                <Palette className="w-10 h-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-slate-800">
-                Arts & Crafts
-              </h3>
-              <p className="text-slate-600 leading-relaxed">
-                Beautiful songket weaving and traditional handicrafts that
-                showcase our artistic mastery
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="group">
-          <div className="relative bg-gradient-to-br from-success/5 to-success/10 rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 border border-success/10 group-hover:scale-105 overflow-hidden">
-            <div
-              className="absolute inset-0 bg-cover bg-center opacity-30 transition-opacity duration-500 group-hover:opacity-12"
-              style={{
-                backgroundImage: `url('/pacu-jalur.jpeg?height=400&width=600')`,
-              }}
-            />
-            <div className="relative z-10">
-              <div className="w-20 h-20 bg-gradient-to-br from-success to-primary rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:rotate-6 transition-transform duration-300">
-                <Users className="w-10 h-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-slate-800">
-                Festivals
-              </h3>
-              <p className="text-slate-600 leading-relaxed">
-                Vibrant celebrations throughout the year showcasing our living
-                traditions and community spirit
-              </p>
-            </div>
-          </div>
-        </div>
+            </TiltCard3D>
+          );
+        })}
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
+
+      {/* Signature Cuisine Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 items-center mb-24">
         <div>
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-amber-100 to-rose-100 text-rose-600 font-medium mb-6">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-rose-100 dark:bg-rose-950/60 text-rose-600 dark:text-rose-300 font-semibold text-xs sm:text-sm mb-6">
             <Utensils className="w-4 h-4 mr-2" />
             Signature Cuisine
           </div>
-          <h2 className="text-5xl font-bold mb-8 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent leading-tight">
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-6 bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent leading-tight">
             Pempek: The Soul of Palembang
           </h2>
-          <p className="text-lg text-slate-700 mb-8 leading-relaxed">
-            No visit to Palembang is complete without trying Pempek, the city's
-            most famous culinary creation. This fish cake delicacy, served with
-            a sweet and sour sauce called "cuko," has been a staple of Palembang
-            cuisine for centuries and represents the heart of our culinary
-            identity.
+          <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 mb-8 leading-relaxed">
+            No visit to Palembang is complete without tasting Pempek, the city's legendary culinary masterpiece.
+            Made from freshly caught fish and sagu, served with a rich, tangy tamarind "cuko" sauce, it represents centuries of culinary perfection.
           </p>
-          <div className="space-y-6">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-rose-500 to-amber-400 rounded-2xl flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold">1</span>
+          <div className="space-y-4">
+            {[
+              { num: "1", name: "Pempek Kapal Selam", desc: "Large fishcake parcel filled with whole rich egg, shaped like a submarine." },
+              { num: "2", name: "Pempek Lenjer", desc: "Long cylindrical savory roll with delicate chewy texture." },
+              { num: "3", name: "Pempek Adaan", desc: "Savory round fish ball seasoned with shallots and fried to golden perfection." },
+            ].map((p, i) => (
+              <div key={i} className="flex items-start gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-rose-500 flex items-center justify-center text-white font-bold shadow-md flex-shrink-0">
+                  {p.num}
+                </div>
+                <div>
+                  <h4 className="font-bold text-base text-slate-800 dark:text-white">{p.name}</h4>
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">{p.desc}</p>
+                </div>
               </div>
-              <div>
-                <h4 className="font-bold text-lg text-slate-800">
-                  Pempek Kapal Selam
-                </h4>
-                <p className="text-slate-600">
-                  Large pempek filled with egg, resembling a submarine.
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-pink-400 rounded-2xl flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold">2</span>
-              </div>
-              <div>
-                <h4 className="font-bold text-lg text-slate-800">
-                  Pempek Lenjer
-                </h4>
-                <p className="text-slate-600">
-                  Cylindrical shaped pempek with smooth texture.
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-lime-500 to-teal-400 rounded-2xl flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold">3</span>
-              </div>
-              <div>
-                <h4 className="font-bold text-lg text-slate-800">
-                  Pempek Adaan
-                </h4>
-                <p className="text-slate-600">
-                  Round shaped with crispy texture and unique flavor.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
+
         <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-rose-100 to-amber-100 rounded-3xl transform rotate-6" />
-          <img
-            src="/pempek.jpeg"
-            alt="Pempek dishes"
-            className="rounded-3xl shadow-2xl w-full relative z-10 border-4 border-white"
-          />
+          <TiltCard3D maxTilt={8} scale={1.02}>
+            <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-slate-800 relative">
+              <img
+                src="/pempek.jpeg"
+                alt="Pempek dishes"
+                className="w-full h-auto object-cover rounded-2xl"
+              />
+            </div>
+          </TiltCard3D>
         </div>
       </div>
 
+      {/* Traditional Arts & Crafts Section */}
       <div className="mb-24">
-  <div className="text-center mb-16">
-    <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#FFEEDA] to-[#F9E8F0] text-[#B86A6A] font-medium mb-6">
-      <Palette className="w-4 h-4 mr-2" />
-      Artistic Heritage
-    </div>
-    <h2 className="text-5xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
-      Traditional Arts & Crafts
-    </h2>
-  </div>
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-teal-100 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 font-semibold text-xs sm:text-sm mb-4">
+            <Palette className="w-4 h-4 mr-2" />
+            Artistic Heritage
+          </div>
+          <h2 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
+            Traditional Arts & Crafts
+          </h2>
+        </div>
 
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-    {/* Card 1 - Songket */}
-    <div className="group">
-      <div className="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-[#F5EDE5] group-hover:scale-[1.02]">
-        <figure className="relative overflow-hidden">
-          <img
-            src="/songket3.jpeg"
-            alt="Songket weaving"
-            className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        </figure>
-        <div className="p-8">
-          <h3 className="text-2xl font-bold mb-4 text-slate-800">Songket Weaving</h3>
-          <p className="text-slate-600 leading-relaxed mb-6">
-            Traditional handwoven fabric with intricate gold and silver threads, representing the pinnacle of
-            Palembang's textile artistry and cultural sophistication.
-          </p>
-          <button className="btn rounded-full bg-gradient-to-r from-[#D8A47F] to-[#A58CAA] border-0 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
-            Learn More
-            <ArrowRight className="w-4 h-4 ml-2" />
-          </button>
-        </div>
-      </div>
-    </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <TiltCard3D maxTilt={10} scale={1.02}>
+            <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-xl dark:shadow-slate-950/50 overflow-hidden border border-slate-200/80 dark:border-slate-800 h-full flex flex-col justify-between group">
+              <figure className="relative overflow-hidden h-64">
+                <img
+                  src="/songket3.jpeg"
+                  alt="Songket weaving"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </figure>
+              <div className="p-8">
+                <h3 className="text-2xl font-bold mb-3 text-slate-800 dark:text-white">Songket Weaving</h3>
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-6 text-sm">
+                  Traditional handwoven textile with intricate gold and silver threads, representing the pinnacle of Palembang's royal elegance.
+                </p>
+                <Link
+                  to="/attractions"
+                  className="btn btn-sm sm:btn-md rounded-full bg-gradient-to-r from-primary to-accent border-0 text-white shadow-md hover:shadow-lg hover:scale-105 transition-all"
+                >
+                  Explore Weaving Centers
+                  <ArrowRight className="w-4 h-4 ml-1.5" />
+                </Link>
+              </div>
+            </div>
+          </TiltCard3D>
 
-    {/* Card 2 - Dance */}
-    <div className="group">
-      <div className="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-[#F5EDE5] group-hover:scale-[1.02]">
-        <figure className="relative overflow-hidden">
-          <img
-            src="/tari.jpeg"
-            alt="Traditional dance"
-            className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        </figure>
-        <div className="p-8">
-          <h3 className="text-2xl font-bold mb-4 text-slate-800">Gending Sriwijaya</h3>
-          <p className="text-slate-600 leading-relaxed mb-6">
-            Traditional dance that tells the story of the ancient Srivijaya kingdom, performed with elegant movements
-            and colorful costumes that captivate audiences.
-          </p>
-          <button className="btn rounded-full bg-gradient-to-r from-[#F0A6CA] to-[#94B2D2] border-0 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
-            Watch Video
-            <ArrowRight className="w-4 h-4 ml-2" />
-          </button>
+          <TiltCard3D maxTilt={10} scale={1.02}>
+            <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-xl dark:shadow-slate-950/50 overflow-hidden border border-slate-200/80 dark:border-slate-800 h-full flex flex-col justify-between group">
+              <figure className="relative overflow-hidden h-64">
+                <img
+                  src="/tari.jpeg"
+                  alt="Traditional dance"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </figure>
+              <div className="p-8">
+                <h3 className="text-2xl font-bold mb-3 text-slate-800 dark:text-white">Gending Sriwijaya</h3>
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-6 text-sm">
+                  The supreme welcome dance recounting the grandeur of the ancient Sriwijaya kingdom, performed with gold fingernail extensions (Tanggai) and regal costumes.
+                </p>
+                <Link
+                  to="/contact"
+                  className="btn btn-sm sm:btn-md rounded-full bg-gradient-to-r from-amber-500 to-rose-500 border-0 text-white shadow-md hover:shadow-lg hover:scale-105 transition-all"
+                >
+                  Cultural Performances
+                  <ArrowRight className="w-4 h-4 ml-1.5" />
+                </Link>
+              </div>
+            </div>
+          </TiltCard3D>
         </div>
       </div>
-    </div>
-  </div>
-</div>
 
-<div className="bg-gradient-to-br from-[#FAF7F3] to-[#F4EBF9] rounded-3xl p-16 mb-24 border border-[#EFEAEA]">
-  <div className="text-center mb-16">
-    <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#FFE5D9] to-[#EADFF6] text-[#B86A6A] font-medium mb-6">
-      <Users className="w-4 h-4 mr-2" />
-      Celebrations
-    </div>
-    <h2 className="text-5xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
-      Annual Festivals
-    </h2>
-  </div>
+      {/* Annual Festivals */}
+      <div className="bg-gradient-to-br from-slate-100 to-teal-50 dark:from-slate-900 dark:via-slate-900/90 dark:to-cyan-950/40 rounded-3xl p-8 sm:p-14 mb-24 border border-slate-200/80 dark:border-slate-800">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold text-xs sm:text-sm mb-4 shadow-sm">
+            <Users className="w-4 h-4 mr-2 text-primary" />
+            Celebrations
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-extrabold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
+            Annual Festivals
+          </h2>
+        </div>
 
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-    <div className="relative rounded-3xl overflow-hidden group shadow-xl hover:shadow-2xl transition-all duration-500">
-      <img
-        src="/festival.jpeg"
-        alt="Sriwijaya Festival"
-        className="absolute inset-0 w-full h-full object-cover opacity-50"
-      />
-      <div className="absolute inset-0 bg-white/60 " />
-      <div className="relative z-10 p-8 text-center">
-        <div className="w-24 h-24 bg-gradient-to-br from-[#D8A47F] to-[#A58CAA] rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-md group-hover:rotate-6 transition-transform duration-300">
-          <span className="text-3xl">🎭</span>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            {
+              emoji: "🎭",
+              title: "Sriwijaya Festival",
+              desc: "Grand cultural celebration featuring theater, royal dances, and international heritage symposiums.",
+              img: "/festival.jpeg",
+            },
+            {
+              emoji: "🚣",
+              title: "Bidar Race on Musi",
+              desc: "Exhilarating traditional long-boat racing on Musi River drawing thousands of cheering spectators.",
+              img: "/bidar.jpeg",
+            },
+            {
+              emoji: "🍜",
+              title: "Pempek Food Festival",
+              desc: "Gastronomic celebration gathering hundreds of artisanal pempek makers and culinary connoisseurs.",
+              img: "/pempek4.jpg",
+            },
+          ].map((fest, idx) => (
+            <TiltCard3D key={idx} maxTilt={12} scale={1.03}>
+              <div className="relative rounded-3xl overflow-hidden group shadow-xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 h-full p-8 text-center flex flex-col justify-between">
+                <div
+                  className="absolute inset-0 bg-cover bg-center opacity-25 dark:opacity-15 group-hover:opacity-35 transition-opacity duration-500"
+                  style={{ backgroundImage: `url('${fest.img}')` }}
+                />
+                <div className="relative z-10">
+                  <div
+                    className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:rotate-6 transition-transform"
+                    style={{ transform: "translateZ(25px)" }}
+                  >
+                    <span className="text-3xl">{fest.emoji}</span>
+                  </div>
+                  <h3
+                    className="text-xl font-bold mb-3 text-slate-800 dark:text-white"
+                    style={{ transform: "translateZ(15px)" }}
+                  >
+                    {fest.title}
+                  </h3>
+                  <p
+                    className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed"
+                    style={{ transform: "translateZ(8px)" }}
+                  >
+                    {fest.desc}
+                  </p>
+                </div>
+              </div>
+            </TiltCard3D>
+          ))}
         </div>
-        <h3 className="text-2xl font-bold mb-4 text-slate-800">
-          Sriwijaya Festival
-        </h3>
-        <p className="text-slate-700 leading-relaxed">
-          Annual cultural festival celebrating Palembang's rich heritage with
-          performances, exhibitions, and traditional ceremonies.
-        </p>
       </div>
-    </div>
-    <div className="relative rounded-3xl overflow-hidden group shadow-xl hover:shadow-2xl transition-all duration-500">
-      <img
-        src="/bidar.jpeg"
-        alt="Bidar Race"
-        className="absolute inset-0 w-full h-full object-cover opacity-80"
-      />
-      <div className="absolute inset-0 bg-white/60" />
-      <div className="relative z-10 p-8 text-center">
-        <div className="w-24 h-24 bg-gradient-to-br from-[#94B2D2] to-[#EAB8B8] rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-md group-hover:rotate-6 transition-transform duration-300">
-          <span className="text-3xl">🚣</span>
-        </div>
-        <h3 className="text-2xl font-bold mb-4 text-slate-800">
-          Bidar Race
-        </h3>
-        <p className="text-slate-700 leading-relaxed">
-          Traditional boat racing on the Musi River showcasing the maritime
-          heritage and competitive spirit of our people.
-        </p>
-      </div>
-    </div>
-    <div className="relative rounded-3xl overflow-hidden group shadow-xl hover:shadow-2xl transition-all duration-500">
-      <img
-        src="/pempek4.jpg"
-        alt="Pempek Festival"
-        className="absolute inset-0 w-full h-full object-cover opacity-80"
-      />
-      <div className="absolute inset-0 bg-white/60 " />
-      <div className="relative z-10 p-8 text-center">
-        <div className="w-24 h-24 bg-gradient-to-br from-[#F4A261] to-[#2A9D8F] rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-md group-hover:rotate-6 transition-transform duration-300">
-          <span className="text-3xl">🍜</span>
-        </div>
-        <h3 className="text-2xl font-bold mb-4 text-slate-800">
-          Pempek Festival
-        </h3>
-        <p className="text-slate-700 leading-relaxed">
-          Celebration of Palembang's most famous culinary creation with cooking
-          competitions and tastings.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
     </div>
   );
 }
 
-function ActionSection(){
-    return(
-        <div className="text-center justify-center mb-4">
-        <h2 className=" pb-2 text-4xl font-bold mb-6 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
-          Experience Our Living Culture
-        </h2>
-        <p className="text-lg text-slate-700 mb-10 max-w-3xl mx-auto leading-relaxed">
-          Join us for cultural workshops, cooking classes, and traditional performances that bring our heritage to life.
-        </p>
-      
-        <div className="flex flex-col sm:flex-row gap-6 justify-center">
-          <Link
-            to="/contact"
-            className="btn btn-lg rounded-full bg-gradient-to-r from-[#D8A47F] to-[#A58CAA] border-0 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-          >
-            Book Cultural Tour
-            <ArrowRight className="w-5 h-5 ml-2" />
-          </Link>
-          <Link
-            to="/attractions"
-            className="btn btn-lg rounded-full bg-white border-2 border-[#D8A47F] text-[#D8A47F] hover:bg-[#D8A47F] hover:text-white hover:scale-105 transition-all duration-300"
-          >
-            Visit Cultural Sites
-          </Link>
-        </div>
+function ActionSection() {
+  return (
+    <div className="text-center justify-center mb-16 px-4">
+      <h2 className="text-3xl sm:text-4xl font-extrabold mb-4 bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
+        Experience Our Living Culture
+      </h2>
+      <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto leading-relaxed">
+        Join authentic cultural workshops, songket weaving demos, and culinary classes to truly connect with Palembang.
+      </p>
+      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <Link
+          to="/contact"
+          className="btn btn-md sm:btn-lg rounded-full bg-gradient-to-r from-primary to-accent border-0 text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300"
+        >
+          Book Cultural Tour
+          <ArrowRight className="w-4 h-4 ml-2" />
+        </Link>
+        <Link
+          to="/attractions"
+          className="btn btn-md sm:btn-lg rounded-full bg-white dark:bg-slate-800 text-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 hover:scale-105 active:scale-95 transition-all duration-300"
+        >
+          Visit Cultural Sites
+        </Link>
       </div>
-      
-    )
+    </div>
+  );
 }

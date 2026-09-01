@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import {
@@ -10,50 +10,52 @@ import {
   ArrowRight,
   Sparkles,
   MessageCircle,
+  CheckCircle,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from 'react';
-
+import TiltCard3D from "../components/3d/TiltCard3D";
 
 function ContactPage() {
   return (
-    <>
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <NavBar />
       <HeroSection />
       <FormContact />
       <InfoContact />
-      <FaqSection />
+      <div className="container mx-auto px-4 pb-20">
+        <FaqSection />
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
 export default ContactPage;
+
 function HeroSection() {
   return (
-    <div className="hero min-h-[70vh] bg-gradient-to-br from-[#316D7C] via-[#8C7A66] to-[#C1A175] mt-16 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsUnVsZT0iZXZlbm9kZCI+PGcgZmlsbD0iI2ZmZmZmZiIgZmlsbE9wYWNpdHk9IjAuMSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-20"></div>
+    <div className="hero min-h-[65vh] bg-gradient-to-br from-[#316D7C] via-[#8C7A66] to-[#C1A175] dark:from-slate-950 dark:via-slate-900 dark:to-cyan-950 mt-16 relative overflow-hidden transition-colors duration-300">
       <div className="hero-content text-center text-white relative z-10">
-        <div className="max-w-5xl">
-          <div className="mb-6">
-            <span className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 backdrop-blur-md text-white/90 text-sm font-medium border border-white/30">
-              <MessageCircle className="w-4 h-4 mr-2" />
+        <div className="max-w-4xl">
+          <div className="mb-6 inline-block">
+            <span className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 dark:bg-slate-900/60 backdrop-blur-md text-white/90 text-xs sm:text-sm font-medium border border-white/30 dark:border-slate-700">
+              <MessageCircle className="w-4 h-4 mr-2 text-cyan-300" />
               Get in Touch
             </span>
           </div>
-          <h1 className="mb-6 text-6xl md:text-7xl font-bold text-white drop-shadow-2xl">
+          <h1 className="mb-6 text-5xl sm:text-6xl md:text-7xl font-black text-white drop-shadow-2xl">
             Contact{" "}
-            <span className="bg-gradient-to-r from-[#C1A175] via-[#8C7A66] to-[#316D7C] bg-clip-text text-transparent">
-              US
+            <span className="bg-gradient-to-r from-[#FDE68A] via-[#C1A175] to-[#67E8F9] dark:from-[#38bdf8] dark:via-[#fbbf24] dark:to-[#34d399] bg-clip-text text-transparent">
+              Us
             </span>
           </h1>
-          <p className="mb-8 text-xl md:text-2xl text-white/90 leading-relaxed font-light">
-            Plan your perfect visit to Palembang with our local experts
+          <p className="mb-8 text-lg sm:text-xl text-white/90 leading-relaxed font-light max-w-2xl mx-auto">
+            Plan your perfect visit to Palembang with our verified local experts and tourism concierges.
           </p>
           <div className="breadcrumbs text-sm text-white/80 justify-center">
             <ul>
               <li>
-                <Link href="/" className="hover:text-white transition-colors">
+                <Link to="/" className="hover:text-white transition-colors">
                   Home
                 </Link>
               </li>
@@ -66,12 +68,13 @@ function HeroSection() {
   );
 }
 
-
 function FormContact() {
   const [showToast, setShowToast] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     const form = e.target;
 
     fetch("https://formspree.io/f/mwpogkqe", {
@@ -80,86 +83,128 @@ function FormContact() {
       headers: {
         Accept: "application/json",
       },
-    }).then((response) => {
-      if (response.ok) {
-        form.reset();
-        setShowToast(true);
-        setTimeout(() => setShowToast(false), 3000);
-      }
-    });
+    })
+      .then((response) => {
+        setLoading(false);
+        if (response.ok) {
+          form.reset();
+          setShowToast(true);
+          setTimeout(() => setShowToast(false), 4000);
+        }
+      })
+      .catch(() => setLoading(false));
   };
 
   return (
-    <div className="container mx-auto px-4 py-20">
+    <div className="container mx-auto px-4 py-16">
       {showToast && (
-        <div className="fixed top-4 right-4 bg-gradient-to-r from-[#D8A47F] to-[#A58CAA] text-white px-6 py-3 rounded-xl shadow-lg transition-all duration-300 z-50">
-          🎉 Message sent successfully to our Email!
+        <div className="fixed top-20 right-4 flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-4 rounded-2xl shadow-2xl transition-all duration-300 z-50 animate-in slide-in-from-top-4">
+          <CheckCircle className="w-5 h-5" />
+          <span className="font-semibold text-sm">Pesan Anda berhasil terkirim ke tim kami!</span>
         </div>
       )}
-      <div className="bg-white rounded-3xl shadow-2xl p-8 lg:p-12 border border-[#F1EAE5]">
+
+      <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl p-8 sm:p-12 border border-slate-200/80 dark:border-slate-800 transition-colors duration-300 max-w-4xl mx-auto">
         <div className="mb-8">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#FDE2E4] to-[#EADFF6] text-[#B86A6A] font-medium mb-4">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 dark:bg-primary/20 text-primary dark:text-teal-300 font-semibold text-xs sm:text-sm mb-4">
             <Send className="w-4 h-4 mr-2" />
-            Send Message
+            Kirim Pertanyaan / Reservasi
           </div>
-          <h2 className="text-3xl font-bold text-slate-800">Let's Plan Your Journey</h2>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-800 dark:text-white">
+            Let's Plan Your Journey
+          </h2>
         </div>
 
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="form-control">
               <label className="label">
-                <span className="pr-20 label-text font-medium text-slate-700">Full Name</span>
+                <span className="label-text font-semibold text-slate-700 dark:text-slate-300">Nama Lengkap</span>
               </label>
-              <input name="name" type="text" required placeholder="Enter your full name" className="input input-bordered rounded-2xl border-[#E2D5CB] focus:border-[#D8A47F] focus:ring-2 focus:ring-[#D8A47F]/30 transition-all duration-300" />
+              <input
+                name="name"
+                type="text"
+                required
+                placeholder="Masukkan nama lengkap Anda"
+                className="input input-bordered rounded-2xl bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
+              />
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="pr-8 label-text font-medium text-slate-700">Email Address</span>
+                <span className="label-text font-semibold text-slate-700 dark:text-slate-300">Alamat Email</span>
               </label>
-              <input name="email" type="email" required placeholder="Enter your email" className="input input-bordered rounded-2xl border-[#E2D5CB] focus:border-[#D8A47F] focus:ring-2 focus:ring-[#D8A47F]/30 transition-all duration-300" />
+              <input
+                name="email"
+                type="email"
+                required
+                placeholder="nama@email.com"
+                className="input input-bordered rounded-2xl bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
+              />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="form-control">
               <label className="label">
-                <span className="pr-10 label-text font-medium text-slate-700">Phone Number</span>
+                <span className="label-text font-semibold text-slate-700 dark:text-slate-300">Nomor Telepon / WA</span>
               </label>
-              <input name="phone" type="tel" placeholder="Enter your phone number" className="input input-bordered rounded-2xl border-[#E2D5CB] focus:border-[#D8A47F] focus:ring-2 focus:ring-[#D8A47F]/30 transition-all duration-300" />
+              <input
+                name="phone"
+                type="tel"
+                placeholder="+62 8..."
+                className="input input-bordered rounded-2xl bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
+              />
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="pr-15 label-text font-medium text-slate-700">Visit Date</span>
+                <span className="label-text font-semibold text-slate-700 dark:text-slate-300">Rencana Tanggal Kunjungan</span>
               </label>
-              <input name="visit_date" type="date" className="input input-bordered rounded-2xl border-[#E2D5CB] focus:border-[#D8A47F] focus:ring-2 focus:ring-[#D8A47F]/30 transition-all duration-300" />
+              <input
+                name="visit_date"
+                type="date"
+                className="input input-bordered rounded-2xl bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
+              />
             </div>
           </div>
 
-          <div className="form-control flex gap-3">
+          <div className="form-control">
             <label className="label">
-              <span className="label-text font-medium text-slate-700">Number of Visitors</span>
+              <span className="label-text font-semibold text-slate-700 dark:text-slate-300">Jumlah Wisatawan</span>
             </label>
-            <select name="visitors" required className="pl-2 select select-bordered rounded-2xl border-[#E2D5CB] focus:border-[#D8A47F] focus:ring-2 focus:ring-[#D8A47F]/30 transition-all duration-300">
-              <option disabled selected>Select number of visitors</option>
-              <option>1 person</option>
-              <option>2-5 people</option>
-              <option>6-10 people</option>
-              <option>More than 10 people</option>
+            <select
+              name="visitors"
+              required
+              defaultValue=""
+              className="select select-bordered rounded-2xl bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
+            >
+              <option value="" disabled>Pilih jumlah wisatawan</option>
+              <option value="1">1 Orang (Solo Traveler)</option>
+              <option value="2-5">2 - 5 Orang (Keluarga / Teman)</option>
+              <option value="6-10">6 - 10 Orang (Rombongan)</option>
+              <option value="10+">Lebih dari 10 Orang (Group Tour)</option>
             </select>
           </div>
 
           <div className="form-control">
             <label className="label">
-              <span className="pr-20 label-text font-medium text-slate-700">Message</span>
+              <span className="label-text font-semibold text-slate-700 dark:text-slate-300">Pesan & Rencana Minat</span>
             </label>
-            <textarea name="message" required className="textarea textarea-bordered rounded-2xl border-[#E2D5CB] focus:border-[#D8A47F] focus:ring-2 focus:ring-[#D8A47F]/30 transition-all duration-300 h-32" placeholder="Tell us about your travel plans and interests"></textarea>
+            <textarea
+              name="message"
+              required
+              className="textarea textarea-bordered rounded-2xl bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 h-32"
+              placeholder="Ceritakan rencana wisata, preferensi kuliner, atau destinasi yang ingin Anda kunjungi..."
+            ></textarea>
           </div>
 
-          <div className="form-control mt-8">
-            <button type="submit" className="btn btn-lg rounded-full bg-gradient-to-r from-[#D8A47F] to-[#A58CAA] border-0 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+          <div className="form-control pt-4">
+            <button
+              type="submit"
+              disabled={loading}
+              className="btn btn-lg rounded-full bg-gradient-to-r from-primary to-accent border-0 text-white shadow-xl hover:shadow-cyan-500/25 hover:scale-105 active:scale-95 transition-all duration-300"
+            >
               <Send className="w-5 h-5 mr-2" />
-              Send Message
+              {loading ? "Mengirim..." : "Kirim Pesan Sekarang"}
               <ArrowRight className="w-5 h-5 ml-2" />
             </button>
           </div>
@@ -170,179 +215,134 @@ function FormContact() {
 }
 
 function InfoContact() {
+  const contactBoxes = [
+    {
+      icon: Phone,
+      title: "Telepon & WhatsApp",
+      detail: "+62 821 7446 4169",
+      gradient: "from-amber-500 to-rose-500",
+    },
+    {
+      icon: Mail,
+      title: "Email Resmi",
+      detail: "info.wonderfulpalembang@gmail.com",
+      gradient: "from-teal-500 to-cyan-500",
+    },
+    {
+      icon: MapPin,
+      title: "Pusat Informasi Turis",
+      detail: "Jl. Jend. Sudirman No. 123, Palembang",
+      gradient: "from-emerald-500 to-teal-500",
+    },
+    {
+      icon: Clock,
+      title: "Jam Layanan Concierge",
+      detail: "Senin – Minggu: 08:00 – 20:00 WIB",
+      gradient: "from-orange-500 to-purple-500",
+    },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-20">
-      <div className="space-y-16">
-        <div>
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#FDE2E4] to-[#EADFF6] text-[#B86A6A] font-medium mb-6">
+    <div className="container mx-auto px-4 py-16">
+      <div className="space-y-12">
+        <div className="text-center max-w-2xl mx-auto">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 dark:bg-primary/20 text-primary dark:text-teal-300 font-semibold text-xs sm:text-sm mb-4">
             <Sparkles className="w-4 h-4 mr-2" />
             Contact Information
           </div>
-          <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
-            Get in Touch
+          <h2 className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent mb-4">
+            Get in Touch With Us
           </h2>
-          <p className="text-lg text-slate-700 mb-8 leading-relaxed">
-            Our local tourism experts are here to help you plan the perfect
-            visit to Palembang. Whether you need recommendations, bookings, or
-            just have questions about our beautiful city, we're here to assist
-            you.
+          <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
+            Tim representatif kami siap memberikan rekomendasi terbaik untuk pengalaman liburan di Palembang.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="group">
-            <div className="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-6 text-center border border-[#F1EAE5] group-hover:scale-105">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#D8A47F] to-[#A58CAA] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:rotate-6 transition-transform duration-300">
-                <Phone className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="font-bold text-lg text-slate-800 mb-2">Phone</h3>
-              <p className="text-slate-700">+62 821 7446 4169</p>
-            </div>
-          </div>
-
-          <div className="group">
-            <div className="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-6 text-center border border-[#F1EAE5] group-hover:scale-105">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#94B2D2] to-[#EAB8B8] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:rotate-6 transition-transform duration-300">
-                <Mail className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="font-bold text-lg text-slate-800 mb-2">Email</h3>
-              <p className="text-slate-700">
-                info.wonderfulpalembang@gmail.com
-              </p>
-            </div>
-          </div>
-
-          <div className="group">
-            <div className="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-6 text-center border border-[#F1EAE5] group-hover:scale-105">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#34D399] to-[#22D3EE] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:rotate-6 transition-transform duration-300">
-                <MapPin className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="font-bold text-lg text-slate-800 mb-2">Address</h3>
-              <p className="text-slate-700">Jl. Sudirman No. 123, Palembang</p>
-            </div>
-          </div>
-
-          <div className="group">
-            <div className="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-6 text-center border border-[#F1EAE5] group-hover:scale-105">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#FB923C] to-[#A78BFA] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:rotate-6 transition-transform duration-300">
-                <Clock className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="font-bold text-lg text-slate-800 mb-2">
-                Office Hours
-              </h3>
-              <p className="text-slate-700">Mon–Fri: 8AM–5PM</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-gradient-to-br from-[#FAF7F3] to-[#F2ECF7] rounded-3xl p-8 border border-[#F1EAE5]">
-          <h3 className="text-2xl font-bold mb-6 text-slate-800">
-            Our Services
-          </h3>
-          <ul className="space-y-4">
-            <li className="flex items-center">
-              <div className="w-3 h-3 bg-gradient-to-r from-[#D8A47F] to-[#A58CAA] rounded-full mr-4"></div>
-              <span className="text-slate-700">
-                Professional tour guide services
-              </span>
-            </li>
-            <li className="flex items-center">
-              <div className="w-3 h-3 bg-gradient-to-r from-[#94B2D2] to-[#EAB8B8] rounded-full mr-4"></div>
-              <span className="text-slate-700">
-                Hotel and accommodation booking
-              </span>
-            </li>
-            <li className="flex items-center">
-              <div className="w-3 h-3 bg-gradient-to-r from-[#34D399] to-[#22D3EE] rounded-full mr-4"></div>
-              <span className="text-slate-700">
-                Transportation arrangements
-              </span>
-            </li>
-            <li className="flex items-center">
-              <div className="w-3 h-3 bg-gradient-to-r from-[#FB923C] to-[#A78BFA] rounded-full mr-4"></div>
-              <span className="text-slate-700">
-                Cultural experience packages
-              </span>
-            </li>
-            <li className="flex items-center">
-              <div className="w-3 h-3 bg-gradient-to-r from-[#A58CAA] to-[#94B2D2] rounded-full mr-4"></div>
-              <span className="text-slate-700">Authentic culinary tours</span>
-            </li>
-          </ul>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {contactBoxes.map((box, idx) => {
+            const Icon = box.icon;
+            return (
+              <TiltCard3D key={idx} maxTilt={12} scale={1.03}>
+                <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-xl dark:shadow-slate-950/50 p-6 text-center border border-slate-200/80 dark:border-slate-800 h-full flex flex-col justify-between group">
+                  <div>
+                    <div
+                      className={`w-14 h-14 bg-gradient-to-br ${box.gradient} rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg text-white group-hover:rotate-6 transition-transform`}
+                      style={{ transform: "translateZ(25px)" }}
+                    >
+                      <Icon className="w-7 h-7" />
+                    </div>
+                    <h3
+                      className="font-bold text-base text-slate-800 dark:text-white mb-2"
+                      style={{ transform: "translateZ(15px)" }}
+                    >
+                      {box.title}
+                    </h3>
+                    <p
+                      className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm break-words"
+                      style={{ transform: "translateZ(10px)" }}
+                    >
+                      {box.detail}
+                    </p>
+                  </div>
+                </div>
+              </TiltCard3D>
+            );
+          })}
         </div>
       </div>
     </div>
   );
 }
+
 function FaqSection() {
+  const faqs = [
+    {
+      q: "Kapan waktu terbaik untuk berkunjung ke Palembang?",
+      a: "Waktu terbaik adalah saat musim kemarau antara Mei hingga September, serta saat festival tahunan seperti Festival Sriwijaya dan Lomba Perahu Bidar pada bulan Juni/Agustus.",
+    },
+    {
+      q: "Berapa lama durasi ideal untuk liburan di Palembang?",
+      a: "Kami menyarankan durasi minimal 3–4 hari untuk menikmati destinasi utama (Ampera, Pulau Kemaro, Benteng Kuto Besak) dan berwisata kuliner pempek otentik.",
+    },
+    {
+      q: "Bagaimana cara transportasi umum di Palembang?",
+      a: "Palembang memiliki moda modern LRT (Light Rail Transit) dari Bandara SMB II hingga Jakabaring Sport City, armada Teman Bus, dan perahu ketek tradisional di Sungai Musi.",
+    },
+    {
+      q: "Apa saja kuliner wajib selain Pempek?",
+      a: "Jangan lewatkan Mie Celor 26 Ilir, Tekwan, Model Gandum, Pindang Patin Sungai Musi, Martabak HAR, dan Es Kacang Merah khas Palembang.",
+    },
+  ];
+
   return (
-    <div className="mb-10">
-      <div className="text-center mb-16">
-        <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#EADFF6] to-[#FDE2E4] text-[#B86A6A] font-medium mb-6">
+    <div className="mt-8">
+      <div className="text-center mb-12">
+        <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 dark:bg-primary/20 text-primary dark:text-teal-300 font-semibold text-xs sm:text-sm mb-4">
           <MessageCircle className="w-4 h-4 mr-2" />
           Common Questions
         </div>
-        <h2 className="pb-3 text-5xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+        <h2 className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
           Frequently Asked Questions
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="collapse collapse-plus bg-white rounded-2xl shadow-xl border border-[#F1EAE5] transition-all duration-300">
-          <input type="radio" name="faq-accordion" defaultChecked />
-          <div className="collapse-title text-xl font-semibold text-slate-800">
-            What's the best time to visit Palembang?
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        {faqs.map((item, idx) => (
+          <div
+            key={idx}
+            className="collapse collapse-plus bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-200/80 dark:border-slate-800 transition-colors"
+          >
+            <input type="radio" name="faq-accordion" defaultChecked={idx === 0} />
+            <div className="collapse-title text-base sm:text-lg font-bold text-slate-800 dark:text-white">
+              {item.q}
+            </div>
+            <div className="collapse-content">
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                {item.a}
+              </p>
+            </div>
           </div>
-          <div className="collapse-content">
-            <p className="text-slate-700 leading-relaxed">
-              The best time to visit Palembang is during the dry season from May
-              to September when the weather is more pleasant for outdoor
-              activities and sightseeing.
-            </p>
-          </div>
-        </div>
-
-        <div className="collapse collapse-plus bg-white rounded-2xl shadow-xl border border-[#F1EAE5] transition-all duration-300">
-          <input type="radio" name="faq-accordion" />
-          <div className="collapse-title text-xl font-semibold text-slate-800">
-            How many days should I spend in Palembang?
-          </div>
-          <div className="collapse-content">
-            <p className="text-slate-700 leading-relaxed">
-              We recommend at least 3–4 days to explore the main attractions,
-              experience the culture, and enjoy the local cuisine without
-              rushing.
-            </p>
-          </div>
-        </div>
-
-        <div className="collapse collapse-plus bg-white rounded-2xl shadow-xl border border-[#F1EAE5] transition-all duration-300">
-          <input type="radio" name="faq-accordion" />
-          <div className="collapse-title text-xl font-semibold text-slate-800">
-            Is English widely spoken in Palembang?
-          </div>
-          <div className="collapse-content">
-            <p className="text-slate-700 leading-relaxed">
-              While Indonesian is the main language, many people in the tourism
-              industry speak English. Our guides are fluent in English and can
-              assist you throughout your visit.
-            </p>
-          </div>
-        </div>
-
-        <div className="collapse collapse-plus bg-white rounded-2xl shadow-xl border border-[#F1EAE5] transition-all duration-300">
-          <input type="radio" name="faq-accordion" />
-          <div className="collapse-title text-xl font-semibold text-slate-800">
-            What should I try when visiting Palembang?
-          </div>
-          <div className="collapse-content">
-            <p className="text-slate-700 leading-relaxed">
-              Don't miss trying Pempek, the city's signature dish, along with
-              other local specialties like Tekwan, Model, and Es Kacang Merah
-              for a complete culinary experience.
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
