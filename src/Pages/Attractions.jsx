@@ -20,14 +20,14 @@ function Attractions() {
     {
       name: "Great Mosque of Palembang",
       description: "Beautiful mosque with traditional Palembang architecture and historic royal heritage.",
-      image: "/masjid-agung.jpeg",
+      image: "/masjid_agung.jpg",
       rating: 4.6,
       category: "Religious",
       color: "from-[#C1A175] to-[#8C7A66]",
       link: "https://id.wikipedia.org/wiki/Masjid_Agung_Palembang",
     },
     {
-      image: "/museum.jpeg",
+      image: "/museum_balput.jpg",
       name: "Museum Sultan Mahmud Badaruddin II",
       category: "Museum",
       color: "from-[#8C7A66] to-[#316D7C]",
@@ -38,7 +38,7 @@ function Attractions() {
     {
       name: "Kemaro Island",
       description: "Sacred island with Chinese pagoda, love tree legend, and peaceful river vistas.",
-      image: "/kemaro.jpeg",
+      image: "/attractions_hd.jpg",
       rating: 4.6,
       category: "Cultural",
       color: "from-[#8C7A66] to-[#C1A175]",
@@ -47,7 +47,7 @@ function Attractions() {
     {
       name: "Kuto Besak Fortress",
       description: "18th-century defensive fort used by the Sultanate, now a vibrant promenade by the river.",
-      image: "/benteng.jpeg",
+      image: "/attractions_hd.jpg",
       rating: 4.5,
       category: "Historical",
       color: "from-[#8C7A66] to-[#316D7C]",
@@ -65,7 +65,7 @@ function Attractions() {
     {
       name: "Cheng Ho Mosque",
       description: "A mosque with distinctive Chinese architectural pagodas dedicated to Admiral Cheng Ho.",
-      image: "/masjid-chengho.jpeg",
+      image: "/masjid_agung.jpg",
       rating: 4.5,
       category: "Religious",
       color: "from-[#8C7A66] to-[#C1A175]",
@@ -83,7 +83,7 @@ function Attractions() {
     {
       name: "Jakabaring Sport City",
       description: "World-class sports and eco-park complex with international stadiums and serene lakes.",
-      image: "/jakabaring.jpeg",
+      image: "/attractions_hd.jpg",
       rating: 4.4,
       category: "Recreational",
       color: "from-[#316D7C] to-[#C1A175]",
@@ -148,95 +148,67 @@ export default Attractions;
 
 function HeroSection() {
   const attractionStats = [
-    { label: "Destinasi Ikonik", val: "9+ Lokasi", icon: "📍" },
-    { label: "Wisata Religi & Budaya", val: "Internasional", icon: "🕌" },
-    { label: "Rating Kepuasan", val: "4.8 / 5.0", icon: "⭐" },
-    { label: "Akses Transportasi", val: "LRT & Ketek", icon: "🚆" },
+    { label: "Destinasi Ikonik", val: "9+ Lokasi" },
+    { label: "Wisata Religi & Budaya", val: "Internasional" },
+    { label: "Rating Kepuasan", val: "4.8 / 5.0" },
+    { label: "Akses Transportasi", val: "LRT & Ketek" },
   ];
 
   return (
-    <div className="hero min-h-[75vh] mt-16 relative overflow-hidden flex items-center justify-center transition-colors duration-500">
-      {/* 1. Photographic Panoramic Backdrop */}
+    <div className="relative w-full min-h-[70vh] mt-16 overflow-hidden flex items-center justify-center pt-20 pb-16">
+      {/* High Definition Panoramic Backdrop */}
       <div
-        className="absolute inset-0 bg-cover bg-center brightness-75 contrast-110 transform scale-105 transition-transform duration-1000"
+        className="absolute inset-0 bg-cover bg-center hero-bg-hd transform scale-105"
         style={{
-          backgroundImage: `url('/ampera2.jpeg')`,
+          backgroundImage: `url('/attractions_hd.jpg')`,
         }}
       />
 
-      {/* 2. Secondary Destination Visual Overlay */}
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-25 mix-blend-overlay"
-        style={{
-          backgroundImage: `url('/benteng.jpeg')`,
-        }}
-      />
+      {/* Clean Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/60 to-slate-950/40 dark:from-slate-950/95 dark:via-slate-950/70 dark:to-slate-950/50 z-0" />
 
-      {/* 3. Luxurious Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-[#316D7C]/60 to-[#8C7A66]/70 dark:from-slate-950 dark:via-slate-900/80 dark:to-cyan-950/70 z-0" />
-      <div className="absolute inset-0 bg-radial-gradient from-transparent via-black/25 to-black/60 z-0" />
+      {/* Hero Content (No icons, non-colliding layout) */}
+      <div className="relative z-10 text-center text-white px-4 sm:px-8 max-w-4xl mx-auto">
+        <div className="mb-6">
+          <span className="inline-block px-5 py-2 rounded-full bg-white/20 dark:bg-slate-900/70 backdrop-blur-md text-white font-semibold text-xs sm:text-sm border border-white/30 dark:border-slate-700 shadow-lg tracking-wide uppercase">
+            Destinasi Unggulan & Pesona Alam Palembang
+          </span>
+        </div>
 
-      {/* 4. 3D Floating Elements */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        <div
-          className="absolute top-1/4 right-[7%] w-20 h-20 rounded-3xl bg-gradient-to-tr from-cyan-400/25 to-teal-500/20 backdrop-blur-md border border-white/20 shadow-2xl animate-bounce"
-          style={{ animationDuration: "7s", transform: "rotate(45deg) perspective(600px) rotateX(20deg)" }}
-        />
-        <div
-          className="absolute bottom-1/3 left-[8%] w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400/25 to-rose-500/20 backdrop-blur-md border border-white/20 shadow-2xl animate-pulse"
-          style={{ animationDuration: "5s", transform: "rotate(-15deg) perspective(500px) rotateY(25deg)" }}
-        />
-      </div>
+        <h1 className="mb-6 text-4xl sm:text-6xl md:text-7xl font-black text-white drop-shadow-2xl leading-tight tracking-tight">
+          Top{" "}
+          <span className="bg-gradient-to-r from-[#FDE68A] via-[#C1A175] to-[#67E8F9] dark:from-[#38bdf8] dark:via-[#fbbf24] dark:to-[#34d399] bg-clip-text text-transparent">
+            Attractions
+          </span>
+        </h1>
 
-      {/* 5. Main Hero Content */}
-      <div className="hero-content text-center text-white relative z-10 px-4 py-16 max-w-5xl">
-        <div>
-          {/* Badge */}
-          <div className="mb-6 inline-block">
-            <span className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 dark:bg-slate-900/70 backdrop-blur-md text-white/95 text-xs sm:text-sm font-semibold border border-white/30 dark:border-slate-700 shadow-xl">
-              <Camera className="w-4 h-4 mr-2 text-cyan-300" />
-              Destinasi Unggulan & Pesona Alam Palembang
-            </span>
-          </div>
+        <p className="mb-10 text-base sm:text-lg md:text-xl text-white/90 leading-relaxed font-light max-w-2xl mx-auto drop-shadow">
+          Jelajahi landmark legendaris, kemegahan arsitektur religi, museum bersejarah, dan keindahan pulau terapung di jantung Sumatera Selatan.
+        </p>
 
-          {/* Main Title */}
-          <h1 className="mb-6 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white drop-shadow-2xl leading-tight tracking-tight">
-            Top{" "}
-            <span className="bg-gradient-to-r from-[#FDE68A] via-[#C1A175] to-[#67E8F9] dark:from-[#38bdf8] dark:via-[#fbbf24] dark:to-[#34d399] bg-clip-text text-transparent">
-              Attractions
-            </span>
-          </h1>
+        {/* Attraction Metric Highlights (No icons/emojis) */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto mb-10">
+          {attractionStats.map((item, idx) => (
+            <div
+              key={idx}
+              className="bg-white/15 dark:bg-slate-900/60 backdrop-blur-md px-4 py-3 rounded-2xl border border-white/20 dark:border-slate-700/60 text-center"
+            >
+              <div className="font-black text-base sm:text-lg text-amber-300 dark:text-cyan-300">{item.val}</div>
+              <div className="text-[11px] sm:text-xs text-white/80 font-medium truncate">{item.label}</div>
+            </div>
+          ))}
+        </div>
 
-          {/* Subtitle */}
-          <p className="mb-10 text-base sm:text-lg md:text-xl text-white/90 leading-relaxed font-light max-w-3xl mx-auto drop-shadow">
-            Jelajahi landmark legendaris, kemegahan arsitektur religi, museum bersejarah, dan keindahan pulau terapung di jantung Sumatera Selatan.
-          </p>
-
-          {/* Attraction Metric Highlights */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-4xl mx-auto mb-10">
-            {attractionStats.map((item, idx) => (
-              <div
-                key={idx}
-                className="bg-white/15 dark:bg-slate-900/60 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-white/25 dark:border-slate-700/60 shadow-lg text-center hover:scale-105 hover:bg-white/25 transition-all duration-300"
-              >
-                <div className="text-xl sm:text-2xl mb-1">{item.icon}</div>
-                <div className="font-black text-base sm:text-lg text-amber-300 dark:text-cyan-300">{item.val}</div>
-                <div className="text-[10px] sm:text-xs text-white/80 font-medium truncate">{item.label}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Breadcrumb Navigation */}
-          <div className="breadcrumbs text-xs sm:text-sm text-white/80 justify-center">
-            <ul className="bg-black/30 dark:bg-slate-950/60 backdrop-blur-md px-4 py-1.5 rounded-full inline-flex border border-white/20 dark:border-slate-700/50">
-              <li>
-                <Link to="/" className="hover:text-cyan-300 transition-colors font-medium">
-                  Beranda
-                </Link>
-              </li>
-              <li className="text-cyan-300 font-bold">Destinasi Wisata</li>
-            </ul>
-          </div>
+        {/* Breadcrumb Navigation */}
+        <div className="breadcrumbs text-xs sm:text-sm text-white/80 justify-center">
+          <ul className="bg-black/40 dark:bg-slate-950/70 backdrop-blur-md px-4 py-1.5 rounded-full inline-flex border border-white/20 dark:border-slate-700/50">
+            <li>
+              <Link to="/" className="hover:text-cyan-300 transition-colors font-medium">
+                Beranda
+              </Link>
+            </li>
+            <li className="text-cyan-300 font-bold">Destinasi Wisata</li>
+          </ul>
         </div>
       </div>
     </div>

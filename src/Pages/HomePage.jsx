@@ -36,60 +36,52 @@ export default HomePage;
 
 function HeroSection() {
   return (
-    <div className="relative w-full min-h-screen overflow-hidden flex items-center justify-center pt-16">
-      {/* Background Video */}
+    <div className="relative w-full min-h-[90vh] overflow-hidden flex items-center justify-center pt-20 pb-16">
+      {/* High Definition Background Video */}
       <video
         autoPlay
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover brightness-90 contrast-[1.05] dark:brightness-85 dark:contrast-[1.05] transition-all duration-500"
+        className="absolute inset-0 w-full h-full object-cover brightness-90 contrast-105 dark:brightness-85 dark:contrast-110"
       >
         <source src="/vid-banner.mp4" type="video/mp4" />
       </video>
 
-      {/* 3D Floating Objects */}
-      <FloatingElements3D variant="hero" />
+      {/* Clean Gradient Overlay for Readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-slate-950/40 dark:from-slate-950/90 dark:via-slate-950/40 dark:to-slate-950/50 z-0" />
 
-      {/* Cinematic Contrast Gradient Overlay (Preserves video clarity while keeping text readable) */}
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-900/20 to-slate-950/40 dark:from-slate-950/75 dark:via-transparent dark:to-slate-950/45 z-0" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30 z-0" />
-
-      {/* Hero Content */}
-      <div className="relative z-10 text-center text-white px-4 py-12 sm:px-8 max-w-5xl">
-        <div className="mb-6 inline-block">
-          <span className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 dark:bg-slate-900/60 backdrop-blur-md text-white/95 text-xs sm:text-sm font-medium border border-white/30 dark:border-white/10 shadow-lg">
-            <Sparkles className="w-4 h-4 mr-2 text-amber-300 animate-spin" style={{ animationDuration: "6s" }} />
+      {/* Hero Content (No icons, non-colliding layout) */}
+      <div className="relative z-10 text-center text-white px-4 py-8 sm:px-8 max-w-4xl mx-auto">
+        <div className="mb-6">
+          <span className="inline-block px-5 py-2 rounded-full bg-white/20 dark:bg-slate-900/70 backdrop-blur-md text-white font-semibold text-xs sm:text-sm border border-white/30 dark:border-slate-700 shadow-lg tracking-wide uppercase">
             Discover Indonesia's Hidden Gem
           </span>
         </div>
 
-        <h1 className="mb-6 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white drop-shadow-2xl leading-tight tracking-tight">
+        <h1 className="mb-6 text-4xl sm:text-6xl md:text-7xl font-black text-white drop-shadow-2xl leading-tight tracking-tight">
           Wonderful{" "}
           <span className="bg-gradient-to-r from-[#FDE68A] via-[#C1A175] to-[#67E8F9] dark:from-[#38bdf8] dark:via-[#fbbf24] dark:to-[#34d399] bg-clip-text text-transparent">
             Palembang
           </span>
         </h1>
 
-        <p className="mb-10 text-base sm:text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed font-light drop-shadow">
+        <p className="mb-10 text-base sm:text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed font-light drop-shadow">
           Discover the Venice of the East, where ancient traditions meet modern innovation.
           Experience the rich culture, delicious cuisine, and warm hospitality along the mighty Musi River.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Link
             to="/attractions"
-            className="w-full sm:w-auto btn btn-lg rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 border-0 text-white shadow-2xl hover:shadow-cyan-500/30 hover:scale-105 active:scale-95 transition-all duration-300"
+            className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 font-bold text-white shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 text-center"
           >
-            <Camera className="w-5 h-5 mr-2" />
             Explore Attractions
-            <ArrowRight className="w-5 h-5 ml-2" />
           </Link>
           <Link
             to="/history"
-            className="w-full sm:w-auto btn btn-lg rounded-full bg-white/20 dark:bg-slate-900/60 backdrop-blur-md text-white border-white/30 dark:border-slate-700 hover:bg-white/30 dark:hover:bg-slate-800 hover:scale-105 active:scale-95 transition-all duration-300"
+            className="w-full sm:w-auto px-8 py-4 rounded-full bg-white/20 dark:bg-slate-900/60 backdrop-blur-md text-white font-bold border border-white/40 dark:border-slate-700 hover:bg-white/30 dark:hover:bg-slate-800 hover:scale-105 active:scale-95 transition-all duration-300 text-center"
           >
-            <Play className="w-5 h-5 mr-2 text-amber-300" />
             Learn History
           </Link>
         </div>

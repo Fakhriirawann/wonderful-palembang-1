@@ -31,95 +31,67 @@ export default Culture;
 
 function HeroSection() {
   const cultureHighlights = [
-    { label: "Tenun Songket Emas", val: "Ratu Kain", icon: "✨" },
-    { label: "Kuliner Pempek Otentik", val: "Gastronomi", icon: "🥢" },
-    { label: "Tari Gending Sriwijaya", val: "Tari Sakral", icon: "👑" },
-    { label: "Perahu Bidar Musi", val: "Tradisi Air", icon: "🚣" },
+    { label: "Tenun Songket Emas", val: "Ratu Kain" },
+    { label: "Kuliner Pempek Otentik", val: "Gastronomi" },
+    { label: "Tari Gending Sriwijaya", val: "Tari Sakral" },
+    { label: "Perahu Bidar Musi", val: "Tradisi Air" },
   ];
 
   return (
-    <div className="hero min-h-[75vh] mt-16 relative overflow-hidden flex items-center justify-center transition-colors duration-500">
-      {/* 1. Photographic Cultural Backdrop with Rich Duotone Blend */}
+    <div className="relative w-full min-h-[70vh] mt-16 overflow-hidden flex items-center justify-center pt-20 pb-16">
+      {/* High Definition Cultural Backdrop */}
       <div
-        className="absolute inset-0 bg-cover bg-center brightness-75 contrast-110 transform scale-105 transition-transform duration-1000"
+        className="absolute inset-0 bg-cover bg-center hero-bg-hd transform scale-105"
         style={{
-          backgroundImage: `url('/tari.jpeg')`,
+          backgroundImage: `url('/culture_hd.jpg')`,
         }}
       />
 
-      {/* 2. Secondary Songket Texture Overlay */}
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay"
-        style={{
-          backgroundImage: `url('/songket3.jpeg')`,
-        }}
-      />
+      {/* Clean Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/60 to-slate-950/40 dark:from-slate-950/95 dark:via-slate-950/70 dark:to-slate-950/50 z-0" />
 
-      {/* 3. Luxurious Royal Crimson & Gold Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-[#8C7A66]/50 to-[#316D7C]/70 dark:from-slate-950 dark:via-slate-900/80 dark:to-cyan-950/70 z-0" />
-      <div className="absolute inset-0 bg-radial-gradient from-transparent via-black/20 to-black/60 z-0" />
+      {/* Hero Content (No icons, non-colliding layout) */}
+      <div className="relative z-10 text-center text-white px-4 sm:px-8 max-w-4xl mx-auto">
+        <div className="mb-6">
+          <span className="inline-block px-5 py-2 rounded-full bg-white/20 dark:bg-slate-900/70 backdrop-blur-md text-white font-semibold text-xs sm:text-sm border border-white/30 dark:border-slate-700 shadow-lg tracking-wide uppercase">
+            Living Heritage & Mahakarya Sriwijaya
+          </span>
+        </div>
 
-      {/* 4. 3D Floating Royal Badges */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        <div
-          className="absolute top-1/4 left-[7%] w-20 h-20 rounded-3xl bg-gradient-to-tr from-amber-400/25 to-rose-500/20 backdrop-blur-md border border-white/20 shadow-2xl animate-bounce"
-          style={{ animationDuration: "8s", transform: "rotate(35deg) perspective(600px) rotateY(20deg)" }}
-        />
-        <div
-          className="absolute bottom-1/3 right-[8%] w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-400/25 to-amber-400/20 backdrop-blur-md border border-white/20 shadow-2xl animate-pulse"
-          style={{ animationDuration: "6s", transform: "rotate(-25deg) perspective(500px) rotateX(25deg)" }}
-        />
-      </div>
+        <h1 className="mb-6 text-4xl sm:text-6xl md:text-7xl font-black text-white drop-shadow-2xl leading-tight tracking-tight">
+          Culture &{" "}
+          <span className="bg-gradient-to-r from-[#FDE68A] via-[#C1A175] to-[#67E8F9] dark:from-[#38bdf8] dark:via-[#fbbf24] dark:to-[#34d399] bg-clip-text text-transparent">
+            Heritage
+          </span>
+        </h1>
 
-      {/* 5. Main Hero Content */}
-      <div className="hero-content text-center text-white relative z-10 px-4 py-16 max-w-5xl">
-        <div>
-          {/* Badge */}
-          <div className="mb-6 inline-block">
-            <span className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 dark:bg-slate-900/70 backdrop-blur-md text-white/95 text-xs sm:text-sm font-semibold border border-white/30 dark:border-slate-700 shadow-xl">
-              <Heart className="w-4 h-4 mr-2 text-rose-300" />
-              Living Heritage & Mahakarya Sriwijaya
-            </span>
-          </div>
+        <p className="mb-10 text-base sm:text-lg md:text-xl text-white/90 leading-relaxed font-light max-w-2xl mx-auto drop-shadow">
+          Menyelami kekayaan seni tenun songket berlapis emas, kelezatan kuliner pempek otentik, kemegahan tarian istana, dan filosofi luhur wong kito galo.
+        </p>
 
-          {/* Main Title */}
-          <h1 className="mb-6 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white drop-shadow-2xl leading-tight tracking-tight">
-            Culture &{" "}
-            <span className="bg-gradient-to-r from-[#FDE68A] via-[#C1A175] to-[#67E8F9] dark:from-[#38bdf8] dark:via-[#fbbf24] dark:to-[#34d399] bg-clip-text text-transparent">
-              Heritage
-            </span>
-          </h1>
+        {/* Culture Highlight Pills (No icons/emojis) */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto mb-10">
+          {cultureHighlights.map((item, idx) => (
+            <div
+              key={idx}
+              className="bg-white/15 dark:bg-slate-900/60 backdrop-blur-md px-4 py-3 rounded-2xl border border-white/20 dark:border-slate-700/60 text-center"
+            >
+              <div className="font-black text-base sm:text-lg text-amber-300 dark:text-cyan-300">{item.val}</div>
+              <div className="text-[11px] sm:text-xs text-white/80 font-medium truncate">{item.label}</div>
+            </div>
+          ))}
+        </div>
 
-          {/* Subtitle */}
-          <p className="mb-10 text-base sm:text-lg md:text-xl text-white/90 leading-relaxed font-light max-w-3xl mx-auto drop-shadow">
-            Menyelami kekayaan seni tenun songket berlapis emas, kelezatan kuliner pempek otentik, kemegahan tarian istana, dan filosofi luhur wong kito galo.
-          </p>
-
-          {/* Culture Highlight Metric Pills */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-4xl mx-auto mb-10">
-            {cultureHighlights.map((item, idx) => (
-              <div
-                key={idx}
-                className="bg-white/15 dark:bg-slate-900/60 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-white/25 dark:border-slate-700/60 shadow-lg text-center hover:scale-105 hover:bg-white/25 transition-all duration-300"
-              >
-                <div className="text-xl sm:text-2xl mb-1">{item.icon}</div>
-                <div className="font-black text-base sm:text-lg text-amber-300 dark:text-cyan-300">{item.val}</div>
-                <div className="text-[10px] sm:text-xs text-white/80 font-medium truncate">{item.label}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Breadcrumb Navigation */}
-          <div className="breadcrumbs text-xs sm:text-sm text-white/80 justify-center">
-            <ul className="bg-black/30 dark:bg-slate-950/60 backdrop-blur-md px-4 py-1.5 rounded-full inline-flex border border-white/20 dark:border-slate-700/50">
-              <li>
-                <Link to="/" className="hover:text-amber-300 transition-colors font-medium">
-                  Beranda
-                </Link>
-              </li>
-              <li className="text-amber-300 font-bold">Budaya & Seni Palembang</li>
-            </ul>
-          </div>
+        {/* Breadcrumb Navigation */}
+        <div className="breadcrumbs text-xs sm:text-sm text-white/80 justify-center">
+          <ul className="bg-black/40 dark:bg-slate-950/70 backdrop-blur-md px-4 py-1.5 rounded-full inline-flex border border-white/20 dark:border-slate-700/50">
+            <li>
+              <Link to="/" className="hover:text-amber-300 transition-colors font-medium">
+                Beranda
+              </Link>
+            </li>
+            <li className="text-amber-300 font-bold">Budaya & Seni Palembang</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -132,28 +104,28 @@ function CultureSection() {
       icon: Utensils,
       title: "Culinary Arts",
       desc: "Famous for Pempek, Tekwan, and traditional spices that tell stories of centuries-old maritime trade.",
-      bgImage: "/pempek.jpeg?height=400&width=600",
+      bgImage: "/pempek2.jpeg",
       gradient: "from-primary to-secondary",
     },
     {
       icon: Music,
       title: "Traditional Music",
       desc: "Rich musical heritage including Gambus, Batanghari Sembilan, and noble royal melodies.",
-      bgImage: "/gambus.jpeg?height=400&width=600",
+      bgImage: "/culture_hd.jpg",
       gradient: "from-secondary to-accent",
     },
     {
       icon: Palette,
       title: "Arts & Crafts",
       desc: "Exquisite gold-threaded Songket weaving, authentic wood carvings, and traditional lacquerware.",
-      bgImage: "/songket.jpeg?height=400&width=600",
+      bgImage: "/songket.jpeg",
       gradient: "from-accent to-emerald-600",
     },
     {
       icon: Users,
       title: "Festivals",
       desc: "Vibrant boat races and annual cultural pageants celebrating the enduring spirit of Sriwijaya.",
-      bgImage: "/pacu-jalur.jpeg?height=400&width=600",
+      bgImage: "/bidar.jpeg",
       gradient: "from-emerald-600 to-primary",
     },
   ];

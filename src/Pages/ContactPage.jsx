@@ -34,95 +34,67 @@ export default ContactPage;
 
 function HeroSection() {
   const serviceHighlights = [
-    { label: "Respon Cepat", val: "< 24 Jam", icon: "⚡" },
-    { label: "Pemandu Berlisensi", val: "Lokal & Ramah", icon: "🧭" },
-    { label: "Konsultasi Itinerary", val: "Gratis 100%", icon: "📋" },
-    { label: "Layanan Turis", val: "24/7 Aktif", icon: "💬" },
+    { label: "Respon Cepat", val: "< 24 Jam" },
+    { label: "Pemandu Berlisensi", val: "Lokal & Ramah" },
+    { label: "Konsultasi Itinerary", val: "Gratis 100%" },
+    { label: "Layanan Turis", val: "24/7 Aktif" },
   ];
 
   return (
-    <div className="hero min-h-[75vh] mt-16 relative overflow-hidden flex items-center justify-center transition-colors duration-500">
-      {/* 1. Photographic Cityscape Backdrop with Modern Teal-Bronze Blend */}
+    <div className="relative w-full min-h-[70vh] mt-16 overflow-hidden flex items-center justify-center pt-20 pb-16">
+      {/* High Definition Cityscape / Landmark Backdrop */}
       <div
-        className="absolute inset-0 bg-cover bg-center brightness-75 contrast-110 transform scale-105 transition-transform duration-1000"
+        className="absolute inset-0 bg-cover bg-center hero-bg-hd transform scale-105"
         style={{
-          backgroundImage: `url('/bundaran.jpg')`,
+          backgroundImage: `url('/contact_user.jpg')`,
         }}
       />
 
-      {/* 2. Secondary Musi Riverfront Texture Overlay */}
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay"
-        style={{
-          backgroundImage: `url('/musi.jpeg')`,
-        }}
-      />
+      {/* Clean Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/60 to-slate-950/40 dark:from-slate-950/95 dark:via-slate-950/70 dark:to-slate-950/50 z-0" />
 
-      {/* 3. Luxurious Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-[#316D7C]/60 to-[#8C7A66]/70 dark:from-slate-950 dark:via-slate-900/80 dark:to-cyan-950/70 z-0" />
-      <div className="absolute inset-0 bg-radial-gradient from-transparent via-black/20 to-black/60 z-0" />
+      {/* Hero Content (No icons, non-colliding layout) */}
+      <div className="relative z-10 text-center text-white px-4 sm:px-8 max-w-4xl mx-auto">
+        <div className="mb-6">
+          <span className="inline-block px-5 py-2 rounded-full bg-white/20 dark:bg-slate-900/70 backdrop-blur-md text-white font-semibold text-xs sm:text-sm border border-white/30 dark:border-slate-700 shadow-lg tracking-wide uppercase">
+            Layanan Informasi & Konsultasi Wisata Resmi
+          </span>
+        </div>
 
-      {/* 4. 3D Floating Communication Badges */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        <div
-          className="absolute top-1/4 right-[7%] w-20 h-20 rounded-3xl bg-gradient-to-tr from-cyan-400/25 to-teal-500/20 backdrop-blur-md border border-white/20 shadow-2xl animate-bounce"
-          style={{ animationDuration: "7s", transform: "rotate(40deg) perspective(600px) rotateX(25deg)" }}
-        />
-        <div
-          className="absolute bottom-1/3 left-[8%] w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400/25 to-cyan-500/20 backdrop-blur-md border border-white/20 shadow-2xl animate-pulse"
-          style={{ animationDuration: "5s", transform: "rotate(-20deg) perspective(500px) rotateY(20deg)" }}
-        />
-      </div>
+        <h1 className="mb-6 text-4xl sm:text-6xl md:text-7xl font-black text-white drop-shadow-2xl leading-tight tracking-tight">
+          Contact{" "}
+          <span className="bg-gradient-to-r from-[#FDE68A] via-[#C1A175] to-[#67E8F9] dark:from-[#38bdf8] dark:via-[#fbbf24] dark:to-[#34d399] bg-clip-text text-transparent">
+            Us
+          </span>
+        </h1>
 
-      {/* 5. Main Hero Content */}
-      <div className="hero-content text-center text-white relative z-10 px-4 py-16 max-w-5xl">
-        <div>
-          {/* Badge */}
-          <div className="mb-6 inline-block">
-            <span className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 dark:bg-slate-900/70 backdrop-blur-md text-white/95 text-xs sm:text-sm font-semibold border border-white/30 dark:border-slate-700 shadow-xl">
-              <MessageCircle className="w-4 h-4 mr-2 text-cyan-300 animate-pulse" />
-              Layanan Informasi & Konsultasi Wisata Resmi
-            </span>
-          </div>
+        <p className="mb-10 text-base sm:text-lg md:text-xl text-white/90 leading-relaxed font-light max-w-2xl mx-auto drop-shadow">
+          Rencanakan perjalanan liburan tak terlupakan di Palembang bersama pemandu lokal berlisensi dan layanan reservasi terpercaya.
+        </p>
 
-          {/* Main Title */}
-          <h1 className="mb-6 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white drop-shadow-2xl leading-tight tracking-tight">
-            Contact{" "}
-            <span className="bg-gradient-to-r from-[#FDE68A] via-[#C1A175] to-[#67E8F9] dark:from-[#38bdf8] dark:via-[#fbbf24] dark:to-[#34d399] bg-clip-text text-transparent">
-              Us
-            </span>
-          </h1>
+        {/* Service Highlights Pills (No icons/emojis) */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto mb-10">
+          {serviceHighlights.map((item, idx) => (
+            <div
+              key={idx}
+              className="bg-white/15 dark:bg-slate-900/60 backdrop-blur-md px-4 py-3 rounded-2xl border border-white/20 dark:border-slate-700/60 text-center"
+            >
+              <div className="font-black text-base sm:text-lg text-amber-300 dark:text-cyan-300">{item.val}</div>
+              <div className="text-[11px] sm:text-xs text-white/80 font-medium truncate">{item.label}</div>
+            </div>
+          ))}
+        </div>
 
-          {/* Subtitle */}
-          <p className="mb-10 text-base sm:text-lg md:text-xl text-white/90 leading-relaxed font-light max-w-3xl mx-auto drop-shadow">
-            Rencanakan perjalanan liburan tak terlupakan di Palembang bersama pemandu lokal berlisensi dan layanan reservasi terpercaya.
-          </p>
-
-          {/* Service Highlight Metric Pills */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-4xl mx-auto mb-10">
-            {serviceHighlights.map((item, idx) => (
-              <div
-                key={idx}
-                className="bg-white/15 dark:bg-slate-900/60 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-white/25 dark:border-slate-700/60 shadow-lg text-center hover:scale-105 hover:bg-white/25 transition-all duration-300"
-              >
-                <div className="text-xl sm:text-2xl mb-1">{item.icon}</div>
-                <div className="font-black text-base sm:text-lg text-amber-300 dark:text-cyan-300">{item.val}</div>
-                <div className="text-[10px] sm:text-xs text-white/80 font-medium truncate">{item.label}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Breadcrumb Navigation */}
-          <div className="breadcrumbs text-xs sm:text-sm text-white/80 justify-center">
-            <ul className="bg-black/30 dark:bg-slate-950/60 backdrop-blur-md px-4 py-1.5 rounded-full inline-flex border border-white/20 dark:border-slate-700/50">
-              <li>
-                <Link to="/" className="hover:text-cyan-300 transition-colors font-medium">
-                  Beranda
-                </Link>
-              </li>
-              <li className="text-cyan-300 font-bold">Hubungi Kami</li>
-            </ul>
-          </div>
+        {/* Breadcrumb Navigation */}
+        <div className="breadcrumbs text-xs sm:text-sm text-white/80 justify-center">
+          <ul className="bg-black/40 dark:bg-slate-950/70 backdrop-blur-md px-4 py-1.5 rounded-full inline-flex border border-white/20 dark:border-slate-700/50">
+            <li>
+              <Link to="/" className="hover:text-cyan-300 transition-colors font-medium">
+                Beranda
+              </Link>
+            </li>
+            <li className="text-cyan-300 font-bold">Hubungi Kami</li>
+          </ul>
         </div>
       </div>
     </div>
