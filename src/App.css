@@ -23,6 +23,31 @@ html {
   backface-visibility: hidden;
 }
 
+/* HD Image Sharpening, Clarity & Color Vibrancy Enhancement */
+.img-hd {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  filter: contrast(1.08) saturate(1.12) brightness(1.02);
+  transition: filter 0.3s ease, transform 0.5s ease;
+}
+
+.dark .img-hd {
+  filter: contrast(1.12) saturate(1.18) brightness(1.05);
+}
+
+.hero-bg-hd {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
+  filter: contrast(1.12) saturate(1.18) brightness(1.02);
+  transform: translateZ(0);
+}
+
+.dark .hero-bg-hd {
+  filter: contrast(1.18) saturate(1.22) brightness(1.06);
+}
+
 /* Custom Scrollbar for sleek look */
 ::-webkit-scrollbar {
   width: 8px;

@@ -1,7 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { useTheme } from "../../context/ThemeContext";
-import { Sparkles, RotateCcw, Eye, Compass, Info, Sun, Moon } from "lucide-react";
+import {
+  Sparkles,
+  RotateCcw,
+  Eye,
+  Compass,
+  Info,
+  Box,
+  Image as ImageIcon,
+  ZoomIn,
+  Camera,
+  Calendar,
+} from "lucide-react";
+import TiltCard3D from "./TiltCard3D";
 
 export default function AmperaCanvas3D() {
   const mountRef = useRef(null);
@@ -9,6 +21,8 @@ export default function AmperaCanvas3D() {
   const [activeView, setActiveView] = useState("cinematic");
   const [autoRotate, setAutoRotate] = useState(true);
   const [selectedHotspot, setSelectedHotspot] = useState(null);
+  const [viewMode, setViewMode] = useState("3d"); // "3d" | "photo"
+  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
 
   // References to keep three objects across renders
   const sceneRef = useRef(null);
@@ -28,6 +42,37 @@ export default function AmperaCanvas3D() {
 
   const lightsGroupRef = useRef({});
   const materialsRef = useRef([]);
+
+  const amperaPhotos = [
+    {
+      src: "/ampera2.jpeg",
+      title: "Jembatan Ampera Modern & Senja Musi",
+      tag: "Panorama Modern",
+      desc: "Pemandangan megah Jembatan Ampera bercat merah menyala di atas Sungai Musi saat matahari terbenam dengan lampu kota yang mulai berpendar.",
+      year: "2024",
+    },
+    {
+      src: "/ampera.jpeg",
+      title: "Perspektif Dek & Tiang Menara Ampera",
+      tag: "Arsitektur Ikonik",
+      desc: "Menara kembar setinggi 63 meter yang menghubungkan kawasan Seberang Ulu dan Seberang Ilir sebagai urat nadi mobilitas kota Palembang.",
+      year: "Era Modern",
+    },
+    {
+      src: "/ampera-dulu.jpg",
+      title: "Foto Bersejarah Ampera (Tahun 1965)",
+      tag: "Dokumentasi Bersejarah",
+      desc: "Foto langka saat bagian tengah Jembatan Ampera masih dapat diangkat naik-turun seberat 500 ton untuk melintasnya kapal-kapal samudra besar di Sungai Musi.",
+      year: "1965 - 1970",
+    },
+    {
+      src: "/musi.jpeg",
+      title: "Kehidupan Pesisir Sungai Musi & Ampera",
+      tag: "Pesona Musi",
+      desc: "Aktivitas perahu ketek dan denyut nadi perairan Sungai Musi dengan latar megah Jembatan Ampera dari kejauhan.",
+      year: "Budaya Sungai",
+    },
+  ];
 
   useEffect(() => {
     const container = mountRef.current;
@@ -56,10 +101,10 @@ export default function AmperaCanvas3D() {
     rendererRef.current = renderer;
 
     // LIGHTS
-    const ambientLight = new THREE.AmbientLight(0xffffff, isDark ? 0.6 : 1.4);
+    const ambientLight = new THREE.AmbientLight(0xffffff, isDark ? 0.7 : 1.4);
     scene.add(ambientLight);
 
-    const dirLight = new THREE.DirectionalLight(isDark ? 0x88ccff : 0xfffaed, isDark ? 1.0 : 2.5);
+    const dirLight = new THREE.DirectionalLight(isDark ? 0x88ccff : 0xfffaed, isDark ? 1.2 : 2.5);
     dirLight.position.set(30, 40, 20);
     dirLight.castShadow = true;
     dirLight.shadow.mapSize.width = 1024;
@@ -190,7 +235,6 @@ export default function AmperaCanvas3D() {
       // Suspension Cables
       for (let i = 1; i <= 6; i++) {
         const offset = i * 2.2;
-        // Inner and outer cables
         [-offset, offset].forEach((cableX) => {
           const cableLength = Math.hypot(cableX, 9);
           const cableGeo = new THREE.CylinderGeometry(0.04, 0.04, cableLength, 6);
@@ -332,7 +376,7 @@ export default function AmperaCanvas3D() {
 
       // 5. Camera & Orbit Interpolation
       const ctrl = controlsStateRef.current;
-      if (autoRotate && !ctrl.isDragging) {
+      if (autoRotate && !ctrl.isDragging && viewMode === "3d") {
         ctrl.targetRotY += 0.003;
       }
 
@@ -503,149 +547,261 @@ export default function AmperaCanvas3D() {
   const hotspots = [
     {
       id: "tower",
-      title: "Menara Ikonik Ampera",
+      title: "Menara Kembar Ampera",
       desc: "Menara kembar setinggi 63 meter bercat merah megah yang menjadi landmark nomor satu kota Palembang.",
+      img: "/ampera.jpeg",
     },
     {
       id: "musi",
       title: "Sungai Musi",
       desc: "Sungai terpanjang di Sumatera (750 km) yang membelah kota menjadi wilayah Seberang Ulu dan Seberang Ilir.",
+      img: "/musi.jpeg",
     },
     {
-      id: "ketek",
-      title: "Perahu Ketek Tradisional",
-      desc: "Moda transportasi air khas Palembang yang siap mengantar wisatawan menyusuri pesona Sungai Musi.",
+      id: "history",
+      title: "Sejarah Ampera 1965",
+      desc: "Diresmikan tahun 1965, awalnya dinamai Jembatan Bung Karno dengan bagian tengah yang dapat diangkat naik-turun.",
+      img: "/ampera-dulu.jpg",
     },
   ];
 
   return (
     <div className="relative w-full rounded-3xl overflow-hidden shadow-2xl border border-slate-200/80 dark:border-slate-800 bg-gradient-to-b from-slate-100/90 via-slate-50 to-slate-200/90 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 transition-colors duration-500">
-      {/* 3D Canvas Mount */}
-      <div ref={mountRef} className="w-full h-[450px] sm:h-[520px] md:h-[600px] cursor-grab active:cursor-grabbing" />
+      {/* Viewport: 3D Canvas OR Authentic HD Photos */}
+      <div className="relative w-full h-[460px] sm:h-[530px] md:h-[600px]">
+        {/* 3D WebGL Canvas */}
+        <div
+          ref={mountRef}
+          className={`w-full h-full cursor-grab active:cursor-grabbing ${
+            viewMode === "3d" ? "block" : "hidden"
+          }`}
+        />
 
-      {/* Top Header Overlay */}
-      <div className="absolute top-4 left-4 right-4 flex flex-wrap items-center justify-between pointer-events-none gap-2">
-        <div className="flex items-center gap-2 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-lg border border-white/40 dark:border-slate-700/60 pointer-events-auto">
-          <Sparkles className="w-4 h-4 text-primary animate-spin" style={{ animationDuration: "6s" }} />
-          <span className="text-xs sm:text-sm font-semibold bg-gradient-to-r from-[#316D7C] to-[#C1A175] dark:from-[#38bdf8] dark:to-[#fbbf24] bg-clip-text text-transparent">
-            3D Interactive Landmark
-          </span>
-          <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/10 dark:bg-primary/20 text-primary dark:text-cyan-300 font-bold uppercase tracking-wider">
-            Realtime
-          </span>
-        </div>
+        {/* Authentic HD Photo Gallery Mode */}
+        {viewMode === "photo" && (
+          <div className="w-full h-full relative flex items-center justify-center p-4 sm:p-8 bg-slate-950/60 animate-in fade-in duration-300">
+            <TiltCard3D maxTilt={8} scale={1.02} className="w-full h-full max-w-4xl max-h-[500px]">
+              <div className="w-full h-full relative rounded-2xl overflow-hidden shadow-2xl border border-white/20">
+                <img
+                  src={amperaPhotos[selectedPhotoIndex].src}
+                  alt={amperaPhotos[selectedPhotoIndex].title}
+                  className="w-full h-full object-cover"
+                />
 
-        {/* Interaction Hint */}
-        <div className="hidden sm:flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 bg-white/70 dark:bg-slate-900/70 backdrop-blur-sm px-3 py-1 rounded-full border border-white/20 dark:border-slate-800">
-          <Compass className="w-3.5 h-3.5 text-primary" />
-          <span>Klik & Geser untuk rotasi 360° • Scroll untuk zoom</span>
-        </div>
-      </div>
-
-      {/* Camera Controls & Presets Bar */}
-      <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-3 pointer-events-none">
-        {/* View Presets */}
-        <div className="flex items-center gap-1.5 p-1 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 dark:border-slate-700/70 pointer-events-auto">
-          <button
-            onClick={() => setCameraPreset("cinematic")}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 ${
-              activeView === "cinematic"
-                ? "bg-gradient-to-r from-primary to-accent text-white shadow-md"
-                : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
-            }`}
-          >
-            Cinematic
-          </button>
-          <button
-            onClick={() => setCameraPreset("deck")}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 ${
-              activeView === "deck"
-                ? "bg-gradient-to-r from-primary to-accent text-white shadow-md"
-                : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
-            }`}
-          >
-            Jembatan
-          </button>
-          <button
-            onClick={() => setCameraPreset("river")}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 ${
-              activeView === "river"
-                ? "bg-gradient-to-r from-primary to-accent text-white shadow-md"
-                : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
-            }`}
-          >
-            Sungai Musi
-          </button>
-          <button
-            onClick={() => setCameraPreset("top")}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 ${
-              activeView === "top"
-                ? "bg-gradient-to-r from-primary to-accent text-white shadow-md"
-                : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
-            }`}
-          >
-            Bird's Eye
-          </button>
-        </div>
-
-        {/* Right Tools (Auto-Rotate & Reset) */}
-        <div className="flex items-center gap-2 pointer-events-auto">
-          <button
-            onClick={() => setAutoRotate(!autoRotate)}
-            title={autoRotate ? "Jeda Rotasi Otomatis" : "Mulai Rotasi Otomatis"}
-            className={`p-2.5 rounded-2xl backdrop-blur-md shadow-lg border transition-all duration-300 ${
-              autoRotate
-                ? "bg-primary text-white border-primary/40 shadow-primary/30"
-                : "bg-white/90 dark:bg-slate-900/90 text-slate-600 dark:text-slate-300 border-white/50 dark:border-slate-700/70 hover:bg-slate-100 dark:hover:bg-slate-800"
-            }`}
-          >
-            <RotateCcw className={`w-4 h-4 ${autoRotate ? "animate-spin" : ""}`} style={{ animationDuration: "10s" }} />
-          </button>
-
-          <button
-            onClick={() => setCameraPreset("cinematic")}
-            title="Reset Sudut Pandang"
-            className="p-2.5 rounded-2xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-slate-600 dark:text-slate-300 border border-white/50 dark:border-slate-700/70 shadow-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-          >
-            <Eye className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
-
-      {/* Hotspots Info Drawer / Badges */}
-      <div className="absolute top-16 left-4 flex flex-col gap-2 max-w-xs pointer-events-auto">
-        <div className="flex flex-wrap gap-1.5">
-          {hotspots.map((spot) => (
-            <button
-              key={spot.id}
-              onClick={() => setSelectedHotspot(selectedHotspot?.id === spot.id ? null : spot)}
-              className={`text-xs px-2.5 py-1 rounded-xl backdrop-blur-md border transition-all duration-200 flex items-center gap-1 ${
-                selectedHotspot?.id === spot.id
-                  ? "bg-primary text-white border-primary shadow-md"
-                  : "bg-white/80 dark:bg-slate-900/80 text-slate-700 dark:text-slate-200 border-white/40 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-800"
-              }`}
-            >
-              <Info className="w-3 h-3" />
-              {spot.title}
-            </button>
-          ))}
-        </div>
-
-        {selectedHotspot && (
-          <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-primary/20 dark:border-slate-700 text-xs text-slate-700 dark:text-slate-300 animate-in fade-in slide-in-from-top-2 duration-300">
-            <div className="flex justify-between items-start mb-1">
-              <h4 className="font-bold text-slate-900 dark:text-white">{selectedHotspot.title}</h4>
-              <button
-                onClick={() => setSelectedHotspot(null)}
-                className="text-slate-400 hover:text-slate-600 dark:hover:text-white font-bold ml-2"
-              >
-                ✕
-              </button>
-            </div>
-            <p className="leading-relaxed">{selectedHotspot.desc}</p>
+                {/* Photo Info Banner Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent flex flex-col justify-end p-6 sm:p-8 text-white">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/90 text-slate-950 shadow">
+                      {amperaPhotos[selectedPhotoIndex].tag}
+                    </span>
+                    <span className="flex items-center text-xs font-medium text-slate-300 bg-black/40 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
+                      <Calendar className="w-3 h-3 mr-1 text-cyan-400" />
+                      {amperaPhotos[selectedPhotoIndex].year}
+                    </span>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold mb-2 text-white drop-shadow">
+                    {amperaPhotos[selectedPhotoIndex].title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-200 max-w-2xl leading-relaxed">
+                    {amperaPhotos[selectedPhotoIndex].desc}
+                  </p>
+                </div>
+              </div>
+            </TiltCard3D>
           </div>
         )}
       </div>
+
+      {/* Top Header Controls Overlay */}
+      <div className="absolute top-4 left-4 right-4 flex flex-wrap items-center justify-between pointer-events-none gap-2">
+        {/* Mode Switcher: 3D vs Foto Asli HD */}
+        <div className="flex items-center gap-1 p-1 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 dark:border-slate-700/70 pointer-events-auto">
+          <button
+            onClick={() => setViewMode("3d")}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+              viewMode === "3d"
+                ? "bg-primary text-white shadow-md"
+                : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+            }`}
+          >
+            <Box className="w-3.5 h-3.5" />
+            <span>Model 3D Interaktif</span>
+          </button>
+          <button
+            onClick={() => setViewMode("photo")}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+              viewMode === "photo"
+                ? "bg-primary text-white shadow-md"
+                : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+            }`}
+          >
+            <Camera className="w-3.5 h-3.5" />
+            <span>Foto Asli HD Ampera</span>
+          </button>
+        </div>
+
+        {/* Interaction Hint */}
+        <div className="hidden sm:flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/40 dark:border-slate-700/60 shadow-md">
+          <Compass className="w-3.5 h-3.5 text-primary" />
+          <span>
+            {viewMode === "3d"
+              ? "Klik & Geser untuk rotasi 360° • Scroll untuk zoom"
+              : "Galeri Foto Asli Beresolusi Tinggi"}
+          </span>
+        </div>
+      </div>
+
+      {/* Bottom Bar: Camera Presets in 3D Mode OR Photo Selector in Photo Mode */}
+      <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-3 pointer-events-none">
+        {viewMode === "3d" ? (
+          <>
+            {/* 3D View Presets */}
+            <div className="flex items-center gap-1.5 p-1 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md rounded-2xl shadow-xl border border-white/50 dark:border-slate-700/70 pointer-events-auto">
+              <button
+                onClick={() => setCameraPreset("cinematic")}
+                className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 ${
+                  activeView === "cinematic"
+                    ? "bg-gradient-to-r from-primary to-accent text-white shadow-md"
+                    : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+                }`}
+              >
+                Cinematic
+              </button>
+              <button
+                onClick={() => setCameraPreset("deck")}
+                className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 ${
+                  activeView === "deck"
+                    ? "bg-gradient-to-r from-primary to-accent text-white shadow-md"
+                    : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+                }`}
+              >
+                Jembatan
+              </button>
+              <button
+                onClick={() => setCameraPreset("river")}
+                className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 ${
+                  activeView === "river"
+                    ? "bg-gradient-to-r from-primary to-accent text-white shadow-md"
+                    : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+                }`}
+              >
+                Sungai Musi
+              </button>
+              <button
+                onClick={() => setCameraPreset("top")}
+                className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 ${
+                  activeView === "top"
+                    ? "bg-gradient-to-r from-primary to-accent text-white shadow-md"
+                    : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+                }`}
+              >
+                Bird's Eye
+              </button>
+            </div>
+
+            {/* Right 3D Controls (Auto-Rotate & Reset) */}
+            <div className="flex items-center gap-2 pointer-events-auto">
+              <button
+                onClick={() => setAutoRotate(!autoRotate)}
+                title={autoRotate ? "Jeda Rotasi Otomatis" : "Mulai Rotasi Otomatis"}
+                className={`p-2.5 rounded-2xl backdrop-blur-md shadow-lg border transition-all duration-300 ${
+                  autoRotate
+                    ? "bg-primary text-white border-primary/40 shadow-primary/30"
+                    : "bg-white/90 dark:bg-slate-900/90 text-slate-600 dark:text-slate-300 border-white/50 dark:border-slate-700/70 hover:bg-slate-100 dark:hover:bg-slate-800"
+                }`}
+              >
+                <RotateCcw className={`w-4 h-4 ${autoRotate ? "animate-spin" : ""}`} style={{ animationDuration: "10s" }} />
+              </button>
+
+              <button
+                onClick={() => setCameraPreset("cinematic")}
+                title="Reset Sudut Pandang"
+                className="p-2.5 rounded-2xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-slate-600 dark:text-slate-300 border border-white/50 dark:border-slate-700/70 shadow-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              >
+                <Eye className="w-4 h-4" />
+              </button>
+            </div>
+          </>
+        ) : (
+          /* Photo Thumbnails Selector */
+          <div className="w-full flex items-center justify-center gap-2 sm:gap-3 p-2 bg-slate-950/70 backdrop-blur-md rounded-2xl border border-white/20 pointer-events-auto overflow-x-auto">
+            {amperaPhotos.map((p, idx) => (
+              <button
+                key={idx}
+                onClick={() => setSelectedPhotoIndex(idx)}
+                className={`relative rounded-xl overflow-hidden h-14 w-20 sm:w-24 flex-shrink-0 border-2 transition-all ${
+                  selectedPhotoIndex === idx
+                    ? "border-primary shadow-lg scale-105"
+                    : "border-transparent opacity-60 hover:opacity-100"
+                }`}
+              >
+                <img src={p.src} alt={p.title} className="w-full h-full object-cover" />
+                <span className="absolute bottom-0 inset-x-0 bg-black/70 text-[9px] text-white text-center py-0.5 font-bold truncate px-1">
+                  {p.tag}
+                </span>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Hotspots Info Drawer / Badges (in 3D Mode) */}
+      {viewMode === "3d" && (
+        <div className="absolute top-16 left-4 flex flex-col gap-2 max-w-xs pointer-events-auto">
+          <div className="flex flex-wrap gap-1.5">
+            {hotspots.map((spot) => (
+              <button
+                key={spot.id}
+                onClick={() => setSelectedHotspot(selectedHotspot?.id === spot.id ? null : spot)}
+                className={`text-xs px-2.5 py-1 rounded-xl backdrop-blur-md border transition-all duration-200 flex items-center gap-1 ${
+                  selectedHotspot?.id === spot.id
+                    ? "bg-primary text-white border-primary shadow-md"
+                    : "bg-white/80 dark:bg-slate-900/80 text-slate-700 dark:text-slate-200 border-white/40 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-800"
+                }`}
+              >
+                <Info className="w-3 h-3" />
+                {spot.title}
+              </button>
+            ))}
+          </div>
+
+          {selectedHotspot && (
+            <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-primary/20 dark:border-slate-700 text-xs text-slate-700 dark:text-slate-300 animate-in fade-in slide-in-from-top-2 duration-300">
+              <div className="flex justify-between items-start mb-2">
+                <h4 className="font-bold text-slate-900 dark:text-white">{selectedHotspot.title}</h4>
+                <button
+                  onClick={() => setSelectedHotspot(null)}
+                  className="text-slate-400 hover:text-slate-600 dark:hover:text-white font-bold ml-2"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {selectedHotspot.img && (
+                <div className="w-full h-24 rounded-xl overflow-hidden mb-2 border border-slate-200 dark:border-slate-700">
+                  <img
+                    src={selectedHotspot.img}
+                    alt={selectedHotspot.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+
+              <p className="leading-relaxed mb-2">{selectedHotspot.desc}</p>
+              <button
+                onClick={() => {
+                  setSelectedHotspot(null);
+                  setViewMode("photo");
+                }}
+                className="text-[11px] font-semibold text-primary dark:text-cyan-400 hover:underline flex items-center gap-1"
+              >
+                <Camera className="w-3 h-3" />
+                Buka Galeri Foto Lengkap &rarr;
+              </button>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

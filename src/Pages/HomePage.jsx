@@ -43,7 +43,7 @@ function HeroSection() {
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover brightness-50 dark:brightness-[0.35]"
+        className="absolute inset-0 w-full h-full object-cover brightness-90 contrast-[1.05] dark:brightness-85 dark:contrast-[1.05] transition-all duration-500"
       >
         <source src="/vid-banner.mp4" type="video/mp4" />
       </video>
@@ -51,8 +51,9 @@ function HeroSection() {
       {/* 3D Floating Objects */}
       <FloatingElements3D variant="hero" />
 
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#316D7C]/70 via-[#8C7A66]/40 to-[#C1A175]/60 dark:from-slate-950/80 dark:via-slate-900/60 dark:to-cyan-950/70 z-0" />
+      {/* Cinematic Contrast Gradient Overlay (Preserves video clarity while keeping text readable) */}
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-900/20 to-slate-950/40 dark:from-slate-950/75 dark:via-transparent dark:to-slate-950/45 z-0" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30 z-0" />
 
       {/* Hero Content */}
       <div className="relative z-10 text-center text-white px-4 py-12 sm:px-8 max-w-5xl">

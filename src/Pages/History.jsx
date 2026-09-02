@@ -22,33 +22,94 @@ function History() {
 export default History;
 
 function HeroSection() {
+  const historyHighlights = [
+    { label: "Prasasti Kedukan Bukit", val: "682 M", icon: "🏛️" },
+    { label: "Kemaharajaan Sriwijaya", val: "Maritim", icon: "⚓" },
+    { label: "Kesultanan Darussalam", val: "Abad 16", icon: "👑" },
+    { label: "Kota Tertua di Indonesia", val: "1,340+ Thn", icon: "📜" },
+  ];
+
   return (
-    <div className="hero min-h-[65vh] bg-gradient-to-br from-[#316D7C] via-[#8C7A66] to-[#C1A175] dark:from-slate-950 dark:via-slate-900 dark:to-cyan-950 mt-16 relative overflow-hidden transition-colors duration-300">
-      <div className="hero-content text-center text-white relative z-10">
-        <div className="max-w-4xl">
+    <div className="hero min-h-[75vh] mt-16 relative overflow-hidden flex items-center justify-center transition-colors duration-500">
+      {/* 1. Photographic Historic Backdrop with Duotone Blend */}
+      <div
+        className="absolute inset-0 bg-cover bg-center brightness-75 contrast-110 transform scale-105 transition-transform duration-1000"
+        style={{
+          backgroundImage: `url('/ampera-dulu.jpg')`,
+        }}
+      />
+
+      {/* 2. Secondary Texture Layer */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay"
+        style={{
+          backgroundImage: `url('/museum.jpeg')`,
+        }}
+      />
+
+      {/* 3. Luxurious Gradient Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-[#316D7C]/60 to-[#8C7A66]/70 dark:from-slate-950 dark:via-slate-900/80 dark:to-cyan-950/70 z-0" />
+      <div className="absolute inset-0 bg-radial-gradient from-transparent via-black/20 to-black/60 z-0" />
+
+      {/* 4. 3D Floating Ornaments */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <div
+          className="absolute top-1/4 left-[6%] w-20 h-20 rounded-3xl bg-gradient-to-tr from-amber-400/25 to-teal-500/20 backdrop-blur-md border border-white/20 shadow-2xl animate-bounce"
+          style={{ animationDuration: "8s", transform: "rotate(30deg) perspective(600px) rotateY(25deg)" }}
+        />
+        <div
+          className="absolute bottom-1/3 right-[8%] w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-400/25 to-amber-500/20 backdrop-blur-md border border-white/20 shadow-2xl animate-pulse"
+          style={{ animationDuration: "6s", transform: "rotate(-20deg) perspective(500px) rotateX(20deg)" }}
+        />
+      </div>
+
+      {/* 5. Main Hero Content */}
+      <div className="hero-content text-center text-white relative z-10 px-4 py-16 max-w-5xl">
+        <div>
+          {/* Badge */}
           <div className="mb-6 inline-block">
-            <span className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 dark:bg-slate-900/60 backdrop-blur-md text-white/90 text-xs sm:text-sm font-medium border border-white/30 dark:border-slate-700">
-              <Sparkles className="w-4 h-4 mr-2 text-amber-300" />
-              Our 1,300+ Year Legacy
+            <span className="inline-flex items-center px-4 py-2 rounded-full bg-white/20 dark:bg-slate-900/70 backdrop-blur-md text-white/95 text-xs sm:text-sm font-semibold border border-white/30 dark:border-slate-700 shadow-xl">
+              <Sparkles className="w-4 h-4 mr-2 text-amber-300 animate-spin" style={{ animationDuration: "6s" }} />
+              Warisan Peradaban 1.340+ Tahun
             </span>
           </div>
-          <h1 className="mb-6 text-5xl sm:text-6xl md:text-7xl font-black text-white drop-shadow-2xl">
-            History of{" "}
+
+          {/* Main Title */}
+          <h1 className="mb-6 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white drop-shadow-2xl leading-tight tracking-tight">
+            Sejarah & Kejayaan{" "}
             <span className="bg-gradient-to-r from-[#FDE68A] via-[#C1A175] to-[#67E8F9] dark:from-[#38bdf8] dark:via-[#fbbf24] dark:to-[#34d399] bg-clip-text text-transparent">
               Palembang
             </span>
           </h1>
-          <p className="mb-8 text-lg sm:text-xl text-white/90 leading-relaxed font-light max-w-2xl mx-auto">
-            Discover the fascinating chronicles of the Sriwijaya maritime empire and the Palembang Darussalam Sultanate.
+
+          {/* Subtitle */}
+          <p className="mb-10 text-base sm:text-lg md:text-xl text-white/90 leading-relaxed font-light max-w-3xl mx-auto drop-shadow">
+            Menelusuri jejak kegemilangan Kemaharajaan Maritim Sriwijaya, keagungan Kesultanan Palembang Darussalam, hingga evolusi modern "Venice of the East".
           </p>
-          <div className="breadcrumbs text-sm text-white/80 justify-center">
-            <ul>
+
+          {/* Historical Metric Pills Bar */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-4xl mx-auto mb-10">
+            {historyHighlights.map((item, idx) => (
+              <div
+                key={idx}
+                className="bg-white/15 dark:bg-slate-900/60 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-white/25 dark:border-slate-700/60 shadow-lg text-center hover:scale-105 hover:bg-white/25 transition-all duration-300"
+              >
+                <div className="text-xl sm:text-2xl mb-1">{item.icon}</div>
+                <div className="font-black text-base sm:text-lg text-amber-300 dark:text-cyan-300">{item.val}</div>
+                <div className="text-[10px] sm:text-xs text-white/80 font-medium truncate">{item.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Breadcrumb Navigation */}
+          <div className="breadcrumbs text-xs sm:text-sm text-white/80 justify-center">
+            <ul className="bg-black/30 dark:bg-slate-950/60 backdrop-blur-md px-4 py-1.5 rounded-full inline-flex border border-white/20 dark:border-slate-700/50">
               <li>
-                <Link to="/" className="hover:text-white transition-colors">
-                  Home
+                <Link to="/" className="hover:text-amber-300 transition-colors font-medium">
+                  Beranda
                 </Link>
               </li>
-              <li>History</li>
+              <li className="text-amber-300 font-bold">Sejarah Palembang</li>
             </ul>
           </div>
         </div>
